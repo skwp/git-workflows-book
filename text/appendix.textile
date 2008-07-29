@@ -1,0 +1,57 @@
+h1. Appendix A: The .gitconfig
+
+<pre>
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = auto
+[gc]
+  auto = 1
+[merge]
+  summary = true          
+[alias]
+  # The basics. 
+  ci = commit
+  co = checkout
+
+  d = diff                                # show changes in the working directory (not including index)
+  dc = diff --cached                      # show changes in the index only (not working directory)
+  
+  unstage = reset HEAD                    # un-add files from index (tracking)
+  uncommit = reset --soft HEAD^           # go back one commit, put changes into your working dir and index
+  chunkyadd = add --patch                 # stage commits chunk by chunk
+  amend = commit --amend                  # fix last commit
+  ammend = commit --amend                 # for those who can't spell :-)
+  
+  # 'git add -u' handles deleted files, but not new files
+  # 'git add .' handles any current and new files, but not deleted
+  # 'git addall' now handles all changes
+  addall = !sh -c 'git add . && git add -u'
+  
+  outgoing = log -u origin/master..master # outgoing changes (in local, but not origin)
+
+  b = branch -v                   # show commit messages on branch list
+  t = tag -l                      # show commit messages on tag list
+  r = remote -v                   # show urls of remotes
+
+  # Handy shortcuts for rebasing
+  rc = rebase --continue
+  rs = rebase --skip
+  ra = rebase --abort
+
+  # copy a commit from another branch with source info
+  cp = cherry-pick -x             
+      
+  # create a new branch (mnemonic: "git new branch branchname...")
+  nb = checkout -b  
+
+  stat = status
+
+  # Better log formatting
+  changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+  short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+  filelog = log -u  # show changes to a file
+  changelog = log --pretty=format:\" * %s\"   
+</pre>
