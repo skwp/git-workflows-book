@@ -30,6 +30,10 @@ h1. Appendix A: The .gitconfig
   # 'git addall' now handles all changes
   addall = !sh -c 'git add . && git add -u'
   
+  # drop any changes in the working tree, including files not tracked by git
+  # NOTE that this is destructive - any files not tracked by git are deleted
+  drop = !sh -c 'git add . && git stash && git stash drop'
+  
   outgoing = log -u origin/master..master # outgoing changes (in local, but not origin)
 
   b = branch -v                   # show commit messages on branch list

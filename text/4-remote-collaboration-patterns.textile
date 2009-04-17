@@ -253,7 +253,7 @@ h3. Taking a look at contributor's work
 
 To track Charlie's progress, Alice sets up a remote link to Charlie's repo:
 
-@git remote add charlie git@github.com:charlie/some-project.git@
+@git remote add charlie git@github.com:charlie/some-project.git; git fetch charlie@
 
 She can then directly view branches using
 
@@ -269,7 +269,7 @@ Or, by using the techniques from the beginning of the chapter to create local tr
 
   # once the bug is done, put it into master
   git co master
-  git merge --squash charlie 123
+  git merge --squash charlie bug123
   git ci -m "Bug #123 - fix something" --author "Charlie <charlie@charlie.com>"
   git push
 </pre>
@@ -286,6 +286,12 @@ If Charlie does all his work on branches and never touches his master, another e
   git co master
   git fetch bugfreecode; git reset --hard bugfreecode/master
 </pre>
+
+h3. Giving credit to contributors
+
+In the section above, notice the @--author@ switch on the commit line. Git understands that the person committing is not always the person who wrote the code. By using this line, you will see the commit appear on GitHub with two users attached to it, which is a great way to give credit and track the real owner of the code for the future.
+
+The nice thing is that git remembers authors, and you can use pattern matching in the future to specify an author. So to designate Charlie as the author, you can use @--author "cha"@ in the future.
 
 h3. Cleaning up stale remote tracking branches
 

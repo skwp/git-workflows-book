@@ -1,3 +1,4 @@
+
 h1. How git works: building a mental model
 
 If you're familiar with subversion, you're used to one central repository, which everyone interacts with by pulling and pushing changes. While you can use git in this way (something we'll talk about in Chapter 3), there are many fundamental differences to understand. 
