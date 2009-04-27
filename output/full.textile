@@ -64,7 +64,8 @@ There are also many great cheatsheets availble on the web including:
 
 *Chapter 5* focuses on release management including tagging, branching, and cherry picking commits between dev and release branches.
 
-*Chapter 6* is about introducing git into your organization through an unobtrusive bottom-up process, and using git while everyone else is using subversion.h1. How git works: building a mental model
+*Chapter 6* is about introducing git into your organization through an unobtrusive bottom-up process, and using git while everyone else is using subversion.
+h1. How git works: building a mental model
 
 If you're familiar with subversion, you're used to one central repository, which everyone interacts with by pulling and pushing changes. While you can use git in this way (something we'll talk about in Chapter 3), there are many fundamental differences to understand. 
 
@@ -777,7 +778,7 @@ h3. Taking a look at contributor's work
 
 To track Charlie's progress, Alice sets up a remote link to Charlie's repo:
 
-@git remote add charlie git@github.com:charlie/some-project.git@
+@git remote add charlie git@github.com:charlie/some-project.git; git fetch charlie@
 
 She can then directly view branches using
 
@@ -793,7 +794,7 @@ Or, by using the techniques from the beginning of the chapter to create local tr
 
   # once the bug is done, put it into master
   git co master
-  git merge --squash charlie 123
+  git merge --squash charlie bug123
   git ci -m "Bug #123 - fix something" --author "Charlie <charlie@charlie.com>"
   git push
 </pre>
@@ -810,6 +811,12 @@ If Charlie does all his work on branches and never touches his master, another e
   git co master
   git fetch bugfreecode; git reset --hard bugfreecode/master
 </pre>
+
+h3. Giving credit to contributors
+
+In the section above, notice the @--author@ switch on the commit line. Git understands that the person committing is not always the person who wrote the code. By using this line, you will see the commit appear on GitHub with two users attached to it, which is a great way to give credit and track the real owner of the code for the future.
+
+The nice thing is that git remembers authors, and you can use pattern matching in the future to specify an author. So to designate Charlie as the author, you can use @--author "cha"@ in the future.
 
 h3. Cleaning up stale remote tracking branches
 
@@ -1015,6 +1022,10 @@ Nonetheless, this is an effective way to get your code up to github so that you 
   # 'git add .' handles any current and new files, but not deleted
   # 'git addall' now handles all changes
   addall = !sh -c 'git add . && git add -u'
+  
+  # drop any changes in the working tree, including files not tracked by git
+  # NOTE that this is destructive - any files not tracked by git are deleted
+  drop = !sh -c 'git add . && git stash && git stash drop'
   
   outgoing = log -u origin/master..master # outgoing changes (in local, but not origin)
 

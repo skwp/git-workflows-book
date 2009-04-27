@@ -60,6 +60,8 @@ One slightly annoying thing about @git add@ is that it does not take into accoun
 
 To add deletions to the index, a handy shortcut is @git add -u@, which tells git to add all files it knows about, including deletions. When wanting to add all changes, I typically use a combo of @git add .; git add -u@
 
+OR @git addall@ using the recommended aliases.
+
 h3. Staging unrelated changes within one file
 
 Git can also help you tease apart unrelated changes within one file, and add them selectively to the index. I find that I use this rarely because I try to work on separate changes in separate branches, but if you do find yourself in this scenario, git makes it easy:
