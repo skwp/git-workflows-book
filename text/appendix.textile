@@ -17,7 +17,7 @@ h1. Appendix A: The .gitconfig
   co = checkout
 
   d = diff                                # show changes in the working directory (not including index)
-  dc = diff --cached                      # show changes in the index only (not working directory)
+  ds = diff --staged                      # show changes in the index only (not working directory)
   
   unstage = reset HEAD                    # un-add files from index (tracking)
   uncommit = reset --soft HEAD^           # go back one commit, put changes into your working dir and index

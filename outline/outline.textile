@@ -33,6 +33,7 @@ h1. Keeping your changesets clean
  * Fixing the last commit
  * Using the stash to temporarily hide your changes
  * Keeping a topic branch in sync with its parent
+ * Complex branches with multiple features (rebase from master before merge) 
  * Changing commit history after the fact 
 
 h1. Mastering history and logging
@@ -65,8 +66,9 @@ h1. Remote collaboration and code review
  * Outside contributor collaboration workflow  
  * Setting up remote contributor forks
  * Taking a look at contributor’s work
- * Merge/squashing contributor work 
+ * Merge/squashing contributor work (one bug / feature)
  * Giving credit to patch authors when squashing
+ * Interactive rebasing to clean up other people's branches
    
  * Cleaning up stale remote tracking branches
  * Force-overwriting remote history
