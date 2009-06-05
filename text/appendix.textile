@@ -55,3 +55,25 @@ h1. Appendix A: The .gitconfig
   filelog = log -u  # show changes to a file
   changelog = log --pretty=format:\" * %s\"   
 </pre>
+
+h1. Appendix B: Bash functions
+
+Assuming you follow the collaborator workflow recommended in the screencast, you can use the following script to determine which of your collaborator branches you have already merged (whether by squashing, cherry picking, or actual merging) - and send them this list so they can delete them.
+
+Prerequisites:
+ 1. Your commit messages contain ticket numbers such as "Ticket #1234"
+ 2. Your collaborators create branches named exactly for the ticket number. So for example, bob/1234
+
+Usage: merged_branches [remote_name]
+Output: A list of branches (tickets) that have already been merged (can be found in your log)
+
+<pre>
+function merged_branches {
+for branch in `git branch -a | grep $1 | awk '{ print $1 }' | awk -F"/" '{print $2}'` 
+do
+git short --grep="#$branch" | awk -F"#" {'print $2'} | awk {'print $1'}
+done
+}
+</pre>
+
+The latest version of this script can be found at: http://gist.github.com/124462
