@@ -72,7 +72,7 @@ function merged_branches {
 for branch in `git branch -a | grep $1 | awk '{ print $1 }' | awk -F"/" '{print $2}'` 
 do
 git short --grep="#$branch" | awk -F"#" {'print $2'} | awk {'print $1'}
-done
+done | sort | uniq
 }
 </pre>
 
