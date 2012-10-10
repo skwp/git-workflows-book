@@ -1,72 +1,4 @@
-#
-
 Copyright 2011, Yan Pritzker. All Rights Reserved.
-
-1.  [Why use git][1]
-    1.  [Offline productivity, speed, and multitasking][2]
-    2.  [Remote collaboration and code review][3]
-    3.  [Changeset cleanliness][4]
-    4.  [How is this book different from other git books?][5]?
-2.  [How git works: building a mental model][6]
-    1.  [The Repository][7]
-    2.  [The Working Tree][8]
-    3.  [The Index][9]
-3.  [Setting up your environment][10]
-    1.  [Git bash completion][11]
-    2.  [Show the git branch in your bash prompt][12]
-    3.  [Get colorized][13]
-    4.  [Automatic cleanup and compression of the repo][14]
-    5.  [Better merge messages][15]
-    6.  [Better information on branches and remotes][16]
-    7.  [Two useful aliases: unstage and uncommit][17]
-4.  [Keeping your changesets clean][18]
-    1.  [Using the index for breaking apart quick changes][19]
-    2.  [Making several commits from one set of changes][20]
-    3.  [Using git add for deleted files][21]
-    4.  [Staging unrelated changes within one file][22]
-    5.  [Using topic branches][23]
-    6.  [One branch per bug][24]
-    7.  [Coming back to unfinished work on a topic branch][25]
-    8.  [Fixing the last commit][26]
-    9.  [Using the stash to temporarily hide your changes][27]
-    10. [Keeping a topic branch in sync with its parent][28]
-    11. [Changing commit history to clean up change sets][29]
-5.  [Time Traveling for Fun and Profit][30]
-    1.  [Searching for a specific change][31]
-    2.  [Throwing away all changes][32]
-    3.  [Restoring a file or directory to a past state][33]
-    4.  [Throwing away commits][34]
-    5.  [Reverting a changeset][35]
-    6.  [Reverting changes to one file only][36]
-6.  [Remote collaboration and code review][3]
-    1.  [Using git remotes for collaboration][37]
-    2.  [Set up your remote at GitHub][38]
-    3.  [git-remote-branch, a handy automation for remote branches][39]
-    4.  [Creating and pushing to remote branches][40]
-    5.  [Deleting a remote branch][41]
-    6.  [Pulling changes from a remote][42]
-    7.  [Pulling changes using merge][43]
-    8.  [Long lived remote collaboration using rebase][44]
-    9.  [Core committer collaboration workflow][45]
-    10. [Squashing for code review][46]
-    11. [Outside contributor collaboration workflow][47]
-    12. [Setting up remote contributor forks][48]
-    13. [Taking a look at contributor’s work][49]
-    14. [Giving credit to contributors][50]
-    15. [Cleaning up stale remote tracking branches][51]
-    16. [Dealing with conflicts during merges][52]
-    17. [Dealing with conflicts during rebase][53]
-    18. [Bonus: Serving up your local repo to a friend][54]
-7.  [Release management with git][55]
-    1.  [Creating the release branch][56]
-    2.  [Using cherry-pick to move bugs into a release][57]
-    3.  [Generating release changelogs][58]
-8.  [Sneaking git through the backdoor: git-svn][59]
-    1.  [Setting up git-svn to track a remote svn repository][60]
-    2.  [Mapping non conventional svn layouts to git][61]
-    3.  [Migrating to git: keeping svn and git in sync][62]
-9.  [Appendix A: Gitconfig][63]
-10. [Appendix B: Bash functions][64]
 
 Git is an extremely powerful source control system. Its power lies in its speed and flexibility, but this can also be a point of confusion for many new users. Git is unfortunately quite inconsistent in its syntax, and exposes many of its not-so-friendly internals to the outside world, sometimes to the detriment of usability.
 
@@ -139,7 +71,7 @@ The working tree is the set of files you’re currently working with. To start w
 There is a place interchangeably known as the index, cache, or staging area. This is where you put your changes before they are ready to be comitted to the repository. You’ll learn more about the index in Chapter 2, but for now just think of the index as a place that lets you selectively commit changes you make. For example, if you’ve made a set of file modifications, but it turns out they are two unrelated changes, you can add the appropriate half first to the index, make the commit, and then add the second half and make another commit.
 
 A great image of the git workflow and all the parts of the repo is at :
-![][65]
+![](http://osteele.com/images/2008/git-transport.png)
 
 For more introduction to how git works, please see PeepCode’s Git Internals book.
 
@@ -151,7 +83,7 @@ So that you don’t have to type out branch names and other things, locate the f
 
 `. /path/to/git-completion.bash`
 
-If you can’t locate the file, try http://repo.or.cz/w/git.git?a=blob_plain;f=contrib/completion/git-completion.bash
+If you can’t locate the file, try [downloading git-completion.bash](http://repo.or.cz/w/git.git?a=blob_plain;f=contrib/completion/git-completion.bash)
 
 ### Show the git branch in your bash prompt
 
@@ -159,8 +91,7 @@ It’s very helpful to know which branch you’re on at any given time to preven
 
     export PS1='[33[01;34m]u:[33[01;32m]w[33[00;34m][33[01;32m][33[00m][33[01;33m]$(__git_ps1)$ [33[00;37m]'
 
-
-(via http://asemanfar.com/Current-Git-Branch-in-Bash-Prompt)
+via [asemanfar.com](http://asemanfar.com/Current-Git-Branch-in-Bash-Prompt)
 
 Now, let’s make a couple modifications to our ~/.gitconfig to enhance the git experience.
 
@@ -440,7 +371,7 @@ Once you have done this, you’ll be presented with an editor screen with instru
 
 The screen offers a clean set of instructions to follow. Simply edit the file and change the word ‘pick’ to ‘edit’ if you want to change the commit in any way. Once you’ve decided which commits you’ll be working with, git will exit the screen and begin taking you through every commit. At every stage, make sure you read the directions which are pretty simple. You will have the opportunity to edit any commit you want, and commit it again. Once you have done so, `git rebase --continue` will take you to the next commit on your list until you’re done.
 
-You can learn more about interactive rebasing here: [http://book.git-scm.com/4\_interactive\_rebasing.html][67]
+You can [learn more about interactive rebasing at git-scm.com](http://book.git-scm.com/4\_interactive\_rebasing.html)
 
 With git, you’ve got the entire codebase history in your hands. Did you ever want to go back to yesterday’s state, or last week before you broke a particular feature? Git makes it not only easy, but very fast. Let’s look at a couple usecases.
 
@@ -979,71 +910,3 @@ You can now get sneaky and start pulling changes from your team via svn, and pus
 Like magic. However, this is only recommended as a temporary solution because the svn rebase, like any rebase, will rewrite your commit id’s, causing the possibility that anyone you’re sharing code with via github may have a problem with your commits.
 
 Nonetheless, this is an effective way to get your code up to github so that you can do code review comments until the rest of your team members are ready to switch to git. When they are, they can simply clone the repo url from github, and proceed as normal.
-
- [1]: #Why+use+git
- [2]: #Offline+productivity,+speed,+and+multitasking
- [3]: #Remote+collaboration+and+code+review
- [4]: #Changeset+cleanliness
- [5]: #How+is+this+book+different+from+other+git+books
- [6]: #How+git+works:+building+a+mental+model
- [7]: #The+Repository
- [8]: #The+Working+Tree
- [9]: #The+Index
- [10]: #Setting+up+your+environment
- [11]: #Git+bash+completion
- [12]: #Show+the+git+branch+in+your+bash+prompt
- [13]: #Get+colorized
- [14]: #Automatic+cleanup+and+compression+of+the+repo
- [15]: #Better+merge+messages
- [16]: #Better+information+on+branches+and+remotes
- [17]: #Two+useful+aliases:+unstage+and+uncommit
- [18]: #Keeping+your+changesets+clean
- [19]: #Using+the+index+for+breaking+apart+quick+changes
- [20]: #Making+several+commits+from+one+set+of+changes
- [21]: #Using+@git+add@+for+deleted+files
- [22]: #Staging+unrelated+changes+within+one+file
- [23]: #Using+topic+branches
- [24]: #One+branch+per+bug
- [25]: #Coming+back+to+unfinished+work+on+a+topic+branch
- [26]: #Fixing+the+last+commit
- [27]: #Using+the+stash+to+temporarily+hide+your+changes
- [28]: #Keeping+a+topic+branch+in+sync+with+its+parent
- [29]: #Changing+commit+history+to+clean+up+change+sets
- [30]: #Time+Traveling+for+Fun+and+Profit
- [31]: #Searching+for+a+specific+change
- [32]: #Throwing+away+all+changes
- [33]: #Restoring+a+file+or+directory+to+a+past+state
- [34]: #Throwing+away+commits
- [35]: #Reverting+a+changeset
- [36]: #Reverting+changes+to+one+file+only
- [37]: #Using+git+remotes+for+collaboration
- [38]: #Set+up+your+remote+at+GitHub
- [39]: #git-remote-branch,+a+handy+automation+for+remote+branches
- [40]: #Creating+and+pushing+to+remote+branches
- [41]: #Deleting+a+remote+branch
- [42]: #Pulling+changes+from+a+remote
- [43]: #Pulling+changes+using+merge
- [44]: #Long+lived+remote+collaboration+using+rebase
- [45]: #Core+committer+collaboration+workflow
- [46]: #Squashing+for+code+review
- [47]: #Outside+contributor+collaboration+workflow
- [48]: #Setting+up+remote+contributor+forks
- [49]: #Taking+a+look+at+contributor's+work
- [50]: #Giving+credit+to+contributors
- [51]: #Cleaning+up+stale+remote+tracking+branches
- [52]: #Dealing+with+conflicts+during+merges
- [53]: #Dealing+with+conflicts+during+rebase
- [54]: #Bonus:+Serving+up+your+local+repo+to+a+friend
- [55]: #Release+management+with+git
- [56]: #Creating+the+release+branch
- [57]: #Using+cherry-pick+to+move+bugs+into+a+release
- [58]: #Generating+release+changelogs
- [59]: #Sneaking+git+through+the+backdoor:+git-svn
- [60]: #Setting+up+git-svn+to+track+a+remote+svn+repository
- [61]: #Mapping+non+conventional+svn+layouts+to+git
- [62]: #Migrating+to+git:+keeping+svn+and+git+in+sync
- [63]: #Appendix+A:+Gitconfig
- [64]: #Appendix+B:+Bash+functions
- [65]: http://osteele.com/images/2008/git-transport.png
- []: http://asemanfar.com/Current-Git-Branch-in-Bash-Prompt
- [67]: http://book.git-scm.com/4_interactive_rebasing.html
