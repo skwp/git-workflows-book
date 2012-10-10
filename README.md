@@ -361,19 +361,23 @@ Substituting `[N]` for the last N commits that you want to work with.
 
 Once you have done this, you’ll be presented with an editor screen with instructions. It will look something like this:
 
-    pick 06e0e1a (dev) Add query stats at top of page for dev/devcache
-      pick 850150f (dev) Disable newrelic in test01 and dev01
-      pick 737b01b Ticket #1606 - error while accessing /db_admin/available_distro
+```
+pick 06e0e1a (dev) Add query stats at top of page for dev/devcache
+pick 850150f (dev) Disable newrelic in test01 and dev01
+pick 737b01b Ticket #1606 - error while accessing /db_admin/available_distro
 
-      # Rebase 5926a38..737b01b onto 5926a38
-      #
-      # Commands:
-      #  pick = use commit
-      #  edit = use commit, but stop for amending
-      #  squash = use commit, but meld into previous commit
-      #
-      # If you remove a line here THAT COMMIT WILL BE LOST.
-
+# Rebase 5926a38..737b01b onto 5926a38
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like "squash", but discard this commit's log message
+#  x, exec = run command (the rest of the line) using shell
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+```
 
 The screen offers a clean set of instructions to follow. Simply edit the file and change the word ‘pick’ to ‘edit’ if you want to change the commit in any way. Once you’ve decided which commits you’ll be working with, git will exit the screen and begin taking you through every commit. At every stage, make sure you read the directions which are pretty simple. You will have the opportunity to edit any commit you want, and commit it again. Once you have done so, `git rebase --continue` will take you to the next commit on your list until you’re done.
 
