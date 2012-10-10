@@ -1,6 +1,6 @@
 # Git Workflows by Yan Pritzker
 
-### Why use git?
+## Why use git?
 
 Git is an extremely powerful source control system. Its power lies in its speed and flexibility, but this can also be a point of confusion for many new users. Git is unfortunately quite inconsistent in its syntax, and exposes many of its not-so-friendly internals to the outside world, sometimes to the detriment of usability.
 
@@ -55,6 +55,8 @@ If you’re familiar with subversion, you’re used to one central repository, w
 With git you always have the entire repository in your hands, including all its history, branches, and tags. A git project starts in one of two ways. Either you create the repo locally using `git init`, or you start working on someone else’s existing project by using `git clone [repo url]`.
 
 Let’s examine the three basic components of a git project tree:
+
+## Chapter 1 - Setup & Repo Overview
 
 ### The Repository
 
@@ -163,6 +165,8 @@ For more aliases, please see the appendix which includes the entire recommended 
 Git provides a number of tools which can alter your commit history to clean up your changes after the fact, as well as tools to use prior to and during commit time to keep separate changes separate. I use this capability to maintain a *one changeset per feature, one feature per changeset* development philosophy.
 
 This is important for two reasons: First, because it makes it easy for your fellow developers to see change history in one spot and do simple code reviews without tracking a bug or feature across many commit sets. Second, because it simplifies constructing selective releases on the fly (picking a specific set of bugs and features to be included into a new branch).
+
+## Chapter 2 - Keeping Your Changsets Clean
 
 ### Using the index for breaking apart quick changes
 
@@ -377,6 +381,8 @@ You can [learn more about interactive rebasing at git-scm.com](http://book.git-s
 
 With git, you’ve got the entire codebase history in your hands. Did you ever want to go back to yesterday’s state, or last week before you broke a particular feature? Git makes it not only easy, but very fast. Let’s look at a couple usecases.
 
+## Chapter 3 - Time Traveling for Fun and Profit
+
 ### Searching for a specific change
 
 If you’re looking for a changeset and you remember you messed with an object called “foo\_bar\_baz” but don’t remember quite when, you can search for it using the log. The `-p` parameter tells git to print the actual contents of the patch so you can see the changes.
@@ -474,6 +480,8 @@ And now we’ll stage just the file we’re interested in.
 Now we’ll just throw away the rest of the changes, which we don’t care about:
 
 `git checkout -f`
+
+## Chapter 4 - Remote Collaboration and Code Review
 
 Git is great for remote collaboration because of several factors:
 
@@ -808,6 +816,8 @@ Release management is all about branch management, and branching in git is easy.
 *   A release is cut by creating a new branch from master, or by branching from the last release branch and cherry-picking selected changesets. The master branch is tagged at the release point.
 *   Emergency fixes to production are cherry-picked into the release branch.
 
+## Chapter 5 - Release Management
+
 ### Creating the release branch
 
 Let’s say this is the first time you’re creating a release. You’ve worked with your team to stabilize the code in *master*, and are now creating release *1.0*.
@@ -856,6 +866,11 @@ You can then use that commit to generate your changelog
 A great way to introduce git into your organization is…not to! Your team or management can be resistant to change, but that doesn’t mean you can’t start reaping the benefits of git’s fully offline repositories, fast logs, topic branches, and changeset management.
 
 By using git-svn you can get all the benefits of git while pushing your commits to an svn repository. When you’re ready, you can migrate to a fully git-based solution in only two commands.
+
+## Chapter 6 - Sneaking Git Through The Backdoor
+
+If you work in an organization where svn is firmly entrenched, and there are too many developers to make a smooth and sweeping transition, do not despair!
+In this chapter, we'll learn how to start using git on top of svn transparently, so that you can benefit from speed and offline productivity, as well as how to migrate your repo once you're ready.
 
 ### Setting up git-svn to track a remote svn repository
 
@@ -912,5 +927,22 @@ You can now get sneaky and start pulling changes from your team via svn, and pus
 Like magic. However, this is only recommended as a temporary solution because the svn rebase, like any rebase, will rewrite your commit id’s, causing the possibility that anyone you’re sharing code with via github may have a problem with your commits.
 
 Nonetheless, this is an effective way to get your code up to github so that you can do code review comments until the rest of your team members are ready to switch to git. When they are, they can simply clone the repo url from github, and proceed as normal.
+
+### A Note on Source Control Politics and Religion
+
+The purpose of this chapter was to show you how you can start using git without having to convince your boss or your ops team that git is a good thing. However, be warned that once you
+start using git, and have to collaborate with others that are on svn, you will quickly become frustrated at svn's lack of the features you've grown to love. This is good! That means you're
+ready to lead the team to a transition. Having spent time learning git deeply, by reading this book and hopefully at least one of the other resources I pointed out, you should be prepared
+to become the git expert in your organization if you want to help people transition.
+
+The way I recommend leading the transition is from the bottom, by showing developers on a one by one basis, how you've got things set up and why you think git is cool. Be prepared that not everyone will invest the
+time you have to learn the system. That means that people may run into complex problems and questions that you should be prepared to solve. Personally I take it as an opportunity to
+improve my understanding of git internals every time someone does something crazy with rebase or reset and think they've totally broken their system :) Do not attempt to force git
+from the top of an organization, as you'll be met with a lot of frustration. People are comfortable in their source control and they don't want to learn new systems without seeing the benefit first.
+Show them the benefit on your machine, then invite them to transition theirs.
+
+Once you have transitioned a handful of people to git, let them too become experts, and spread the git throughout the organization. Soon enough, most of the dev team will be using git on 
+top of svn. At this point, you can simply point this out, and lead the political transformation to pure git development. Github alleviates many concerns of having centralized repositories,
+so whip out your credit card, get an account for a few bucks a month, and have at it. Good luck!
 
 Copyright 2011, Yan Pritzker. All Rights Reserved.
