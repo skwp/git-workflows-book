@@ -1,17 +1,17 @@
-# 
+#
 
 Copyright 2011, Yan Pritzker. All Rights Reserved.
 
-1.  [Why use git][1] 
+1.  [Why use git][1]
     1.  [Offline productivity, speed, and multitasking][2]
     2.  [Remote collaboration and code review][3]
     3.  [Changeset cleanliness][4]
     4.  [How is this book different from other git books?][5]?
-2.  [How git works: building a mental model][6] 
+2.  [How git works: building a mental model][6]
     1.  [The Repository][7]
     2.  [The Working Tree][8]
     3.  [The Index][9]
-3.  [Setting up your environment][10] 
+3.  [Setting up your environment][10]
     1.  [Git bash completion][11]
     2.  [Show the git branch in your bash prompt][12]
     3.  [Get colorized][13]
@@ -19,7 +19,7 @@ Copyright 2011, Yan Pritzker. All Rights Reserved.
     5.  [Better merge messages][15]
     6.  [Better information on branches and remotes][16]
     7.  [Two useful aliases: unstage and uncommit][17]
-4.  [Keeping your changesets clean][18] 
+4.  [Keeping your changesets clean][18]
     1.  [Using the index for breaking apart quick changes][19]
     2.  [Making several commits from one set of changes][20]
     3.  [Using git add for deleted files][21]
@@ -31,14 +31,14 @@ Copyright 2011, Yan Pritzker. All Rights Reserved.
     9.  [Using the stash to temporarily hide your changes][27]
     10. [Keeping a topic branch in sync with its parent][28]
     11. [Changing commit history to clean up change sets][29]
-5.  [Time Traveling for Fun and Profit][30] 
+5.  [Time Traveling for Fun and Profit][30]
     1.  [Searching for a specific change][31]
     2.  [Throwing away all changes][32]
     3.  [Restoring a file or directory to a past state][33]
     4.  [Throwing away commits][34]
     5.  [Reverting a changeset][35]
     6.  [Reverting changes to one file only][36]
-6.  [Remote collaboration and code review][3] 
+6.  [Remote collaboration and code review][3]
     1.  [Using git remotes for collaboration][37]
     2.  [Set up your remote at GitHub][38]
     3.  [git-remote-branch, a handy automation for remote branches][39]
@@ -57,11 +57,11 @@ Copyright 2011, Yan Pritzker. All Rights Reserved.
     16. [Dealing with conflicts during merges][52]
     17. [Dealing with conflicts during rebase][53]
     18. [Bonus: Serving up your local repo to a friend][54]
-7.  [Release management with git][55] 
+7.  [Release management with git][55]
     1.  [Creating the release branch][56]
     2.  [Using cherry-pick to move bugs into a release][57]
     3.  [Generating release changelogs][58]
-8.  [Sneaking git through the backdoor: git-svn][59] 
+8.  [Sneaking git through the backdoor: git-svn][59]
     1.  [Setting up git-svn to track a remote svn repository][60]
     2.  [Mapping non conventional svn layouts to git][61]
     3.  [Migrating to git: keeping svn and git in sync][62]
@@ -138,7 +138,7 @@ The working tree is the set of files you’re currently working with. To start w
 
 There is a place interchangeably known as the index, cache, or staging area. This is where you put your changes before they are ready to be comitted to the repository. You’ll learn more about the index in Chapter 2, but for now just think of the index as a place that lets you selectively commit changes you make. For example, if you’ve made a set of file modifications, but it turns out they are two unrelated changes, you can add the appropriate half first to the index, make the commit, and then add the second half and make another commit.
 
-A great image of the git workflow and all the parts of the repo is at :  
+A great image of the git workflow and all the parts of the repo is at :
 ![][65]
 
 For more introduction to how git works, please see PeepCode’s Git Internals book.
@@ -158,7 +158,7 @@ If you can’t locate the file, try http://repo.or.cz/w/git.git?a=blob_plain;f=c
 It’s very helpful to know which branch you’re on at any given time to prevent mistakes. Simply place the following code in your .bashrc and enjoy. Here I’ve supplied the prompt line (PS1) from my own terminal, but feel free to modify yours as you see fit, inserting the call to $(_\_git\_ps1) wherever you want the branch to appear.
 
     export PS1='[33[01;34m]u:[33[01;32m]w[33[00;34m][33[01;32m][33[00m][33[01;33m]$(__git_ps1)$ [33[00;37m]'
-    
+
 
 (via http://asemanfar.com/Current-Git-Branch-in-Bash-Prompt)
 
@@ -174,7 +174,7 @@ It’s important to make working with git easy on the eyes. Turn on colors to se
       branch = auto
       interactive = auto
       ui = auto
-    
+
 
 ### Automatic cleanup and compression of the repo
 
@@ -182,7 +182,7 @@ Git needs periodic maintenance to make it run fast. Here’s a way to avoid ever
 
     [gc]
       auto=1
-    
+
 
 ### Better merge messages
 
@@ -190,13 +190,13 @@ By default, when you merge a branch in git, you get a fairly meaningless message
 
     [merge]
       summary=true
-    
+
 
 It’s also handy when doing `cherry-pick` to copy changes from one branch to another, to have git automatically put the original commit hash into the commit comment. Here’s an alias for doing this:
 
     [alias]
       cp = cherry-pick -x
-    
+
 
 ### Better information on branches and remotes
 
@@ -206,7 +206,7 @@ By default, the git `branch`, `remote`, and `tag` commands give you lists of thi
       b = branch -v
       r = remote -v
       t = tag -l
-    
+
 
 ### Two useful aliases: unstage and uncommit
 
@@ -215,7 +215,7 @@ There are many other aliases given in the .gitconfig included in the Appendix, b
     [alias]
       unstage = reset HEAD
       uncommit = reset --soft HEAD^
-    
+
 
 This is a case of git doing completely different things depending on switches given to the reset command. This powerful command can be used to throw away commits, or time travel to previous states. While it will be discussed more in Chapter 2, let’s look at these aliases.
 
@@ -247,7 +247,7 @@ Let’s say you’ve been hacking away for a couple hours and now you’ve got t
     # modified:   public/file3
     # modified:   file2
     #
-    
+
 
 Unlike many of git’s obscure error messages, the status screen is actually very friendly and explains what to do. On the status screen above we see we have modified two files and added a new file. But it turns out that ‘file1’ and ‘file3’ are part of a bugfix, and ‘file2’ is an unrelated change. Using the color settings outlined in Chapter 1, you’ll see the files shown in red, indicating that they are not yet staged for commit.
 
@@ -268,7 +268,7 @@ This adds the changes made to file1 and file2 to the index (interchangeably refe
     #   (use "git add ..." to update what will be committed)
     #
     # modified:   file2
-    
+
 
 You’ll notice that the files that are added to the index, under “Changes to be committed” are now colored green instead of the previous red. Now to commit the two changes that have been staged, we issue the commit command:
 
@@ -282,9 +282,7 @@ Now we’re left with the change to file2 in our working tree, and we can follow
 
 One slightly annoying thing about `git add` is that it does not take into account deleted files. Typically, git would like you to use `git rm` to delete files, but in practice, using command line or IDE you are likely to delete files using traditional methods.
 
-To add deletions to the index, a handy shortcut is `git add -u`, which tells git to add all files it knows about, including deletions. When wanting to add all changes, I typically use a combo of `git add .; git add -u`
-
-OR `git addall` using the recommended aliases.
+To add deletions to the index, a handy shortcut is `git add -A`, which tells git to add all files it knows about, including deletions.
 
 ### Staging unrelated changes within one file
 
@@ -327,7 +325,7 @@ Make some more changes. Now we’re done, so let’s bring these changes back to
     git checkout master
     git merge --squash bug123
     git commit
-    
+
 
 Don’t you love squashing bugs? The `--squash` parameter brings in all the commits from the *bug123* branch as if they were one change. It also avoids logging the change as a merge, so it looks like you just made one clean commit with all the changes from the bug123 branch as one. Once you’re sure you don’t need the history of working on that bug anymore, delete the branch.
 
@@ -351,7 +349,7 @@ Note that above we used the `-a` switch which tells git to automatically stage a
 
     git branch -v
     * bug123      937c391 uncommit me: need to finish stuff in the user model
-    
+
 
 And remembering that you were working on bug123, you check out the branch to resume work:
 
@@ -381,7 +379,7 @@ You can then pop your changes off the stash by using `git stash pop` or `git sta
       # fix your prod bug and commit
       git checkout master
       git stash pop
-    
+
 
 Another good use of the stash is for moving uncommitted between branches. Sometimes you start to work on something on master, or on another branch and realize the work probably needs to be moved over to a branch of its own. While you can sometimes checkout another branch and the changes will automaticaly transfer over, occasionally your changes conflict with the code on the branch, so the correct way to do this is to *stash* the changes, checkout the new branch, and then unstash them.
 
@@ -390,21 +388,21 @@ Another good use of the stash is for moving uncommitted between branches. Someti
 When you’ve wandered off for a while on your topic branch, working on your bug or feature, you’ll occasionally want to grab updates that have been made in the master branch, or wherever you branched from. The best way to do this is to use the `rebase` command. The functionality of rebase is best illustrated with a diagram from the git manpages:
 
     Assume the following history exists and the current branch is "topic":
-    
+
               A---B---C topic
              /
         D---E---F---G master
-    
+
     From this point, the result of either of the following commands:
-    
+
     git-rebase master
     git-rebase master topic
     would be:
-    
+
                       A'--B'--C' topic
                      /
         D---E---F---G master
-    
+
 
 So what rebase does is stash your changes, grab the latest from master, and then apply your changes on top. This effectively makes it as if rather than branching several days ago, you just branched now from te tip of the master and made your commits there.
 
@@ -429,7 +427,7 @@ Once you have done this, you’ll be presented with an editor screen with instru
     pick 06e0e1a (dev) Add query stats at top of page for dev/devcache
       pick 850150f (dev) Disable newrelic in test01 and dev01
       pick 737b01b Ticket #1606 - error while accessing /db_admin/available_distro
-    
+
       # Rebase 5926a38..737b01b onto 5926a38
       #
       # Commands:
@@ -438,7 +436,7 @@ Once you have done this, you’ll be presented with an editor screen with instru
       #  squash = use commit, but meld into previous commit
       #
       # If you remove a line here THAT COMMIT WILL BE LOST.
-    
+
 
 The screen offers a clean set of instructions to follow. Simply edit the file and change the word ‘pick’ to ‘edit’ if you want to change the commit in any way. Once you’ve decided which commits you’ll be working with, git will exit the screen and begin taking you through every commit. At every stage, make sure you read the directions which are pretty simple. You will have the opportunity to edit any commit you want, and commit it again. Once you have done so, `git rebase --continue` will take you to the next commit on your list until you’re done.
 
@@ -487,14 +485,14 @@ But what if you know the file was working last week, now it’s broken, and you 
 When you grab a file from a previous time, it sits in your index, modified. So we can take a look at it:
 
     git status
-      
+
       # On branch master
       # Changes to be committed:
       #   (use "git reset HEAD ..." to unstage)
       #
       # modified:   README
       #
-    
+
 
 And we can see what differences it has with the current version:
 
@@ -596,7 +594,7 @@ This will push out changes on all branches that have matching branches on the re
 
 Git is pretty low level when it comes to managing local and remote branches and keeping them in sync. Enter git-remote-branch: a great tool that helps you automate day to day operations on remote branches. As a bonus, it shows you exactly what it’s doing under the hood so you can learn more about how git works. The rest of this chapter will assume you have git-remote-branch installed, and are using the `grb` command.
 
-Homepage: http://github.com/webmat/git\_remote\_branch/tree/master  
+Homepage: http://github.com/webmat/git\_remote\_branch/tree/master
 Installation (you will need rubygems for this):
 
 `sudo gem install git_remote_branch --include-dependencies`
@@ -656,7 +654,7 @@ You will get a warning from git that looks like this:
     Note: moving to "origin/master" which isn't a local branch
       If you want to create a new branch from this checkout, you may do so
       (now or later) by using -b with the checkout command again. Example:
-        git checkout -b 
+        git checkout -b
 
 So in order to actually work with the remote branch, we’ll need a local tracking branch set up to track the remote branch in question:
 
@@ -696,13 +694,13 @@ If this is the way you prefer to work, you can have git always rebase instead of
       remote = origin
       merge = refs/heads/master
       rebase = true
-    
+
 
 **Note:** as before, make sure you understand what you’re doing with rebase. It will rewrite your commit hashes, so if you’ve pushed your code out to one place and rebase from another, you’ll be in trouble. However, if you use rebase as recommended here, to sync with only one GitHub repository, you will have no problems.
 
 ### Core committer collaboration workflow
 
-So, now that we know how to use `git pull --rebase`, let’s take a look at a typical scenario in collaboration between two core committers, Alice and Bob, who work for BugFreeCode, Inc. working on a bug together: 1. Alice creates a branch and makes commits 2. Bob pulls her changes and makes additions 3. Alice pulls Bob’s changes 4. Alice squashes bug into master and closes the branch 
+So, now that we know how to use `git pull --rebase`, let’s take a look at a typical scenario in collaboration between two core committers, Alice and Bob, who work for BugFreeCode, Inc. working on a bug together: 1. Alice creates a branch and makes commits 2. Bob pulls her changes and makes additions 3. Alice pulls Bob’s changes 4. Alice squashes bug into master and closes the branch
 
 Alice starts working:
 
@@ -710,7 +708,7 @@ Alice starts working:
     # hack, hack, hack
     git ci -a -m "Bug #123 fixed, needs code review"
     git push origin bug123
-    
+
 
 She then asks Bob to do a code review on the branch. Bob pulls in Alice’s changes:
 
@@ -719,7 +717,7 @@ She then asks Bob to do a code review on the branch. Bob pulls in Alice’s chan
     # hack, hack, hack
     git ci -a -m "Bug #123 - Cleaned up alice's code"
     git push origin bug123
-    
+
 
 Alice, who is the owner of the bug, now decides the bug is good to go, and merges it into the *master* branch, which their team uses as a starting place to create releases.
 
@@ -729,7 +727,7 @@ Alice, who is the owner of the bug, now decides the bug is good to go, and merge
     git merge --squash bug123
     git ci -m "Bug #123 - fixed all sorts of stuff. Thanks to Bob for the help."
     git push # update the remote master branch
-    
+
 
 Since the bug is now in master, if there is no long term need to keep its history around, Alice deletes the branch from her local repo, and the remote.
 
@@ -747,7 +745,7 @@ I like to add *-squashed* to the end of the branch name so that I know it’s a 
     git merge --squash origin/bug123@
     git commit -m "Bug #123 - squashed commit for code review"
     git push
-    
+
 
 Now, Alice can refer her team to the GitHub url for the changeset, and collect comments using the web interface at GitHub, or coworkers can directly checkout the *bug123-squashed* branch and use `diff` and `show` commands to inspect it.
 
@@ -757,10 +755,10 @@ While Alice and Bob work together by directly committing to the GitHub repo, the
 
 The workflow recommended for outside contributors is as follows, using Alice as an official core committer, and Charlie as the contributor
 
-1. Charlie creates a branch for every feature or bug  
-2. Charlie has a remote repo link to the official repo   
-3. Alice examines code committed by Charlie, adds her own changes  
-5. Alice merges Charlie’s changes into the official *master*  
+1. Charlie creates a branch for every feature or bug
+2. Charlie has a remote repo link to the official repo
+3. Alice examines code committed by Charlie, adds her own changes
+5. Alice merges Charlie’s changes into the official *master*
 6. Charlie pulls changes from official *master* into his own *master*
 
 You already have all the tools you need to execute this workflow. Let’s walk through it.
@@ -795,27 +793,27 @@ Or, by using the techniques from the beginning of the chapter to create local tr
       # hack, hack, hack - helping charlie out
       git ci -a -m "code review and fixing to help Charlie"
       git push charlie bug123
-    
+
       # once the bug is done, put it into master
       git co master
       git merge --squash charlie bug123
       git ci -m "Bug #123 - fix something" --author "Charlie "
       git push
-    
+
 
 Charlie keeps himself in sync to the official master branch by using `pull --rebase`:
 
     git co master
       git pull --rebase bugfreecode master
-    
-
-If Charlie does all his work on branches and never touches his master, another equivalent way, but perhaps slightly safer (avoiding any rebase troubles), is to reset to point to the master  
 
 
-      
-    git co master  
-    git fetch bugfreecode; git reset —hard bugfreecode/master  
-    
+If Charlie does all his work on branches and never touches his master, another equivalent way, but perhaps slightly safer (avoiding any rebase troubles), is to reset to point to the master
+
+
+
+    git co master
+    git fetch bugfreecode; git reset —hard bugfreecode/master
+
 
 ### Giving credit to contributors
 
@@ -837,12 +835,12 @@ When you merge another branch, you may occasionally get a CONFLICT if the code i
 
     git merge --squash origin/bugfix
       CONFLICT (content): Merge conflict in app/models/foo.rb
-    
+
 
 There are two ways to deal with conflicts. I’ve found the easiest thing is to simply open up the file in question, and find the conflicting section. It will look something like this:
 
     >>>>>> origin/bugfix:app/models/foo.rb
-    
+
 
 Simply edit the file to remove the “>>” markers, leaving the correct line of code in place. The other way to do this is to run `git mergetool`. This command will automatically launch whatever available merging utility you have on your system (typically FileMerge on OSX), and give you a graphical UI for picking one line or another. It’s really a matter of personal preference but after some experience I found it’s actually easier to understand the changes by looking at the file directly.
 
@@ -883,10 +881,10 @@ Let’s say this is the first time you’re creating a release. You’ve worked 
 
     grb create 1.0
       git push
-    
+
       git tag tag-1.0
       git push --tags
-    
+
 
 Congratulations, you now have a 1.0 branch created, and a tag called *tag-1.0* and ready for release. Note that at this moment, the tag and the branch are identical. The difference is that the branch pointer may continue to evolve as it gains new commits for prod fixes, while the tag is there permanently for future reference to the branch point.
 
@@ -900,7 +898,7 @@ Your release is running in production, and you’ve found a bug. Let’s commit 
       git co 1.0
       git cherry-pick -x master # or using my alias 'git cp master'
       git push
-    
+
 
 Let’s take a look at what just happened. We committed the fix into master, and then we used a git command called `cherry-pick`. This command copies a patch from one branch to another.
 
@@ -940,28 +938,28 @@ After the command finishes, you have a standard git repo with one special featur
         url = http://url/to/your/svn/repo
         fetch = trunk:refs/remotes/trunk
         tags = tags/*:refs/remotes/tags/*
-    
+
 
 This enables you to push and pull changes from svn. However, instead of using the commands `git push` and `git pull` to do so, you will use `git svn dcommit` to push (equivalent to svn commit), and `git svn rebase` to pull (equivalent to svn update). While these commands have obscure names, they work similarly to `push` and `pull --rebase`. Note that you can make any number of commits locally and then `dcommit` to push them all as individual svn commits.
 
 Now use `git branch -rv` to see the remote branches. Remember, as with any git repo you never work with remote branches directly. So if you’re looking to work with a branch, make a local tracking branch for it.
 
     git nb 1.1.2 branches/1.1.2
-      
+
       # hack
       git ci -a -m "made changes on the branch"
       git svn dcommit # goes to branch 1.1.2
-    
 
-For more on git-svn, please see 
+
+For more on git-svn, please see
 
 ### Mapping non conventional svn layouts to git
 
 If your project uses an unconventional branch layout in subversion, for example branches/1.0.1/module instead of module/branches/1.0.1, you can still use git-svn by making a modification to your .git/config file to properly map the branches. Note the special *** syntax in the branches line below.
 
-[svn-remote “svn”]  
-url = http://company.com/svn/projects  
-fetch = trunk/project-foo:refs/remotes/project-foo/trunk  
+[svn-remote “svn”]
+url = http://company.com/svn/projects
+fetch = trunk/project-foo:refs/remotes/project-foo/trunk
 branches = branches/\*/project-foo:refs/remotes/project-foo/branches/\*
 
 ### Migrating to git: keeping svn and git in sync
@@ -970,13 +968,13 @@ From git’s perspective, your git-svn repo is not different from any other git 
 
     git remote add origin [github url]
       git push
-    
+
 
 You can now get sneaky and start pulling changes from your team via svn, and pushing it to github:
 
     git svn rebase
       git push
-    
+
 
 Like magic. However, this is only recommended as a temporary solution because the svn rebase, like any rebase, will rewrite your commit id’s, causing the possibility that anyone you’re sharing code with via github may have a problem with your commits.
 
