@@ -1,4 +1,4 @@
-# Git Workflows by Yan Pritzker
+# Git Workflows by [Yan Pritzker](http://yanpritzker.com)
 
 ## Why use git?
 
@@ -546,11 +546,11 @@ Once you’ve installed the tool, go ahead and run `grb` without arguments to se
 
 If you’re working on a long lived topic branch for a particular feature, it’s a good idea to back it up to your remote. It’s also useful to push it out to the remote so that others can look at it and collaborate with you. To push an existing branch to the remote:
 
-`grb share [branchname]`
+`git push -u origin [branchname]`
 
 If you haven’t yet created the branch,
 
-`grb create [branchname]`
+`git checkout [branchname]`
 
 Which both creates the local branch and pushes it to the remote.
 
@@ -945,4 +945,4 @@ Once you have transitioned a handful of people to git, let them too become exper
 top of svn. At this point, you can simply point this out, and lead the political transformation to pure git development. Github alleviates many concerns of having centralized repositories,
 so whip out your credit card, get an account for a few bucks a month, and have at it. Good luck!
 
-Copyright 2011, Yan Pritzker. All Rights Reserved.
+Copyright 2011, [Yan Pritzker](http://yanpritzker.com). All Rights Reserved.
