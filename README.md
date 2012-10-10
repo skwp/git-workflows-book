@@ -1,4 +1,6 @@
-Copyright 2011, Yan Pritzker. All Rights Reserved.
+# Git Workflows by Yan Pritzker
+
+### Why use git?
 
 Git is an extremely powerful source control system. Its power lies in its speed and flexibility, but this can also be a point of confusion for many new users. Git is unfortunately quite inconsistent in its syntax, and exposes many of its not-so-friendly internals to the outside world, sometimes to the detriment of usability.
 
@@ -910,3 +912,5 @@ You can now get sneaky and start pulling changes from your team via svn, and pus
 Like magic. However, this is only recommended as a temporary solution because the svn rebase, like any rebase, will rewrite your commit id’s, causing the possibility that anyone you’re sharing code with via github may have a problem with your commits.
 
 Nonetheless, this is an effective way to get your code up to github so that you can do code review comments until the rest of your team members are ready to switch to git. When they are, they can simply clone the repo url from github, and proceed as normal.
+
+Copyright 2011, Yan Pritzker. All Rights Reserved.
