@@ -50,13 +50,13 @@ There are also many great cheatsheets availble on the web including:
 
 **Chapter 6** is about introducing git into your organization through an unobtrusive bottom-up process, and using git while everyone else is using subversion.
 
+## Chapter 1 - Setup & Repo Overview
+
 If you’re familiar with subversion, you’re used to one central repository, which everyone interacts with by pulling and pushing changes. While you can use git in this way (something we’ll talk about in Chapter 3), there are many fundamental differences to understand.
 
 With git you always have the entire repository in your hands, including all its history, branches, and tags. A git project starts in one of two ways. Either you create the repo locally using `git init`, or you start working on someone else’s existing project by using `git clone [repo url]`.
 
 Let’s examine the three basic components of a git project tree:
-
-## Chapter 1 - Setup & Repo Overview
 
 ### The Repository
 
@@ -606,6 +606,7 @@ So in order to actually work with the remote branch, we’ll need a local tracki
 `git checkout -b bug123 origin/bug123`
 
 `Branch bug123 set up to track remote branch refs/remotes/origin/master.`
+
 
 ### Pulling changes using merge
 
