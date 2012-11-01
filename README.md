@@ -731,7 +731,7 @@ Charlie now has an *origin* which refers to his own project on GitHub. But he’
 
 To track Charlie’s progress, Alice sets up a remote link to Charlie’s repo:
 
-`git remote add charlie git`github.com:charlie/some-project.git; git fetch charlie@
+`git remote add charlie git@github.com:charlie/some-project.git; git fetch charlie`
 
 She can then directly view branches using
 
