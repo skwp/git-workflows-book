@@ -656,26 +656,26 @@ Alice starts working:
 
     grb create bug123
     # hack, hack, hack
-    git ci -a -m "Bug #123 fixed, needs code review"
+    git commit -a -m "Bug #123 fixed, needs code review"
     git push origin bug123
 
 
 She then asks Bob to do a code review on the branch. Bob pulls in Alice’s changes:
 
-    git nb bug123 origin/bug123 # first time only
-    git co bug123; git pull --rebase origin bug123 # to sync it up
+    git branch bug123 origin/bug123 # first time only
+    git checkout bug123; git pull --rebase origin bug123 # to sync it up
     # hack, hack, hack
-    git ci -a -m "Bug #123 - Cleaned up alice's code"
+    git commit -a -m "Bug #123 - Cleaned up alice's code"
     git push origin bug123
 
 
 Alice, who is the owner of the bug, now decides the bug is good to go, and merges it into the *master* branch, which their team uses as a starting place to create releases.
 
-    git co bug123
+    git checkout bug123
     git pull --rebase origin bug123
-    git co master
+    git checkout master
     git merge --squash bug123
-    git ci -m "Bug #123 - fixed all sorts of stuff. Thanks to Bob for the help."
+    git commit -m "Bug #123 - fixed all sorts of stuff. Thanks to Bob for the help."
     git push # update the remote master branch
 
 
@@ -739,21 +739,21 @@ She can then directly view branches using
 
 Or, by using the techniques from the beginning of the chapter to create local tracking branches for contributing to Charlie’s work:
 
-    git nb bug123 charlie/bug123
+    git branch bug123 charlie/bug123
       # hack, hack, hack - helping charlie out
-      git ci -a -m "code review and fixing to help Charlie"
+      git commit -a -m "code review and fixing to help Charlie"
       git push charlie bug123
 
       # once the bug is done, put it into master
-      git co master
+      git checkout master
       git merge --squash charlie bug123
-      git ci -m "Bug #123 - fix something" --author "Charlie "
+      git commit -m "Bug #123 - fix something" --author "Charlie "
       git push
 
 
 Charlie keeps himself in sync to the official master branch by using `pull --rebase`:
 
-    git co master
+    git checkout master
       git pull --rebase bugfreecode master
 
 
@@ -761,7 +761,7 @@ If Charlie does all his work on branches and never touches his master, another e
 
 
 
-    git co master
+    git checkout master
     git fetch bugfreecode; git reset —hard bugfreecode/master
 
 
@@ -844,10 +844,10 @@ Congratulations, you now have a 1.0 branch created, and a tag called *tag-1.0* a
 
 Your release is running in production, and you’ve found a bug. Let’s commit the bugfix into *master*, and then cherry-pick the same patch into the branch.
 
-    git co master
+    git checkout master
       # hack, hack, hack
       git commit -a -m "Bug #123 - emergency prod fix"
-      git co 1.0
+      git checkout 1.0
       git cherry-pick -x master # or using my alias 'git cp master'
       git push
 
@@ -901,10 +901,10 @@ This enables you to push and pull changes from svn. However, instead of using th
 
 Now use `git branch -rv` to see the remote branches. Remember, as with any git repo you never work with remote branches directly. So if you’re looking to work with a branch, make a local tracking branch for it.
 
-    git nb 1.1.2 branches/1.1.2
+    git branch 1.1.2 branches/1.1.2
 
       # hack
-      git ci -a -m "made changes on the branch"
+      git commit -a -m "made changes on the branch"
       git svn dcommit # goes to branch 1.1.2
 
 
