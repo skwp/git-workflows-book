@@ -662,8 +662,8 @@ Alice starts working:
 
 She then asks Bob to do a code review on the branch. Bob pulls in Alice’s changes:
 
-    git branch bug123 origin/bug123 # first time only
-    git checkout bug123; git pull --rebase origin bug123 # to sync it up
+    git branch bug123 origin/bug123  # first time only
+    git checkout bug123; git pull --rebase origin bug123  # to sync it up
     # hack, hack, hack
     git commit -a -m "Bug #123 - Cleaned up alice's code"
     git push origin bug123
@@ -676,7 +676,7 @@ Alice, who is the owner of the bug, now decides the bug is good to go, and merge
     git checkout master
     git merge --squash bug123
     git commit -m "Bug #123 - fixed all sorts of stuff. Thanks to Bob for the help."
-    git push # update the remote master branch
+    git push  # update the remote master branch
 
 
 Since the bug is now in master, if there is no long term need to keep its history around, Alice deletes the branch from her local repo, and the remote.
@@ -848,7 +848,7 @@ Your release is running in production, and you’ve found a bug. Let’s commit 
       # hack, hack, hack
       git commit -a -m "Bug #123 - emergency prod fix"
       git checkout 1.0
-      git cherry-pick -x master # or using my alias 'git cp master'
+      git cherry-pick -x master  # or using my alias 'git cp master'
       git push
 
 
@@ -905,7 +905,7 @@ Now use `git branch -rv` to see the remote branches. Remember, as with any git r
 
       # hack
       git commit -a -m "made changes on the branch"
-      git svn dcommit # goes to branch 1.1.2
+      git svn dcommit  # goes to branch 1.1.2
 
 
 For more on git-svn, please see
