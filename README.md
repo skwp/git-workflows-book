@@ -445,7 +445,7 @@ And we can see what differences it has with the current version:
 
 `git diff --cached`
 
-We use &mdash;cached because the file is in the index.
+We use --cached because the file is in the index.
 
 ### Throwing away commits
 
@@ -767,7 +767,7 @@ If Charlie does all his work on branches and never touches his master, another e
 
     git checkout master
     git fetch bugfreecode
-    git reset &mdash;hard bugfreecode/master
+    git reset --hard bugfreecode/master
 
 
 ### Giving credit to contributors
@@ -826,7 +826,7 @@ Please see the `git help daemon` for further discussion on this topic.
 
 Release management is all about branch management, and branching in git is easy. Here's the general workflow I recommend for managing releases
 
-*   Core committers commit bug fixes and features to master branch with commit messages "Ticket #123 &ndash; short description of bug". Long running features are developed on separate branches and `merge --squash` into master.
+*   Core committers commit bug fixes and features to master branch with commit messages "Ticket #123 --- short description of bug". Long running features are developed on separate branches and `merge --squash` into master.
 *   Outside contributors commit to forks, and have their changes merged in by core committers.
 *   A release is cut by creating a new branch from master, or by branching from the last release branch and cherry-picking selected changesets. The master branch is tagged at the release point.
 *   Emergency fixes to production are cherry-picked into the release branch.
