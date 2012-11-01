@@ -483,7 +483,8 @@ Since we only want to revert the one file, we’ll unstage all the changes.
 
 And now we’ll stage just the file we’re interested in.
 
-`git add filename; git commit -m "Reverting change to file"`
+    git add filename
+    git commit -m "Reverting change to file"
 
 Now we’ll just throw away the rest of the changes, which we don’t care about:
 
@@ -632,7 +633,8 @@ Remember `git rebase`, discussed in Chapter 2? This command lets you move your w
 
 You can grab his changes, and replay your changes on top by using the same rebase technique:
 
-`git fetch origin; git rebase origin/bug123`
+    git fetch origin
+    git rebase origin/bug123
 
 There is no difference between this and the rebase usage covered in Chapter 2, other than that we’re rebasing from a remote tracking branch. Git also offers a shortcut to pull in this manner:
 
@@ -663,7 +665,8 @@ Alice starts working:
 She then asks Bob to do a code review on the branch. Bob pulls in Alice’s changes:
 
     git branch bug123 origin/bug123  # first time only
-    git checkout bug123; git pull --rebase origin bug123  # to sync it up
+    git checkout bug123
+    git pull --rebase origin bug123  # to sync it up
     # hack, hack, hack
     git commit -a -m "Bug #123 - Cleaned up alice's code"
     git push origin bug123
@@ -731,11 +734,12 @@ Charlie now has an *origin* which refers to his own project on GitHub. But he’
 
 To track Charlie’s progress, Alice sets up a remote link to Charlie’s repo:
 
-`git remote add charlie git@github.com:charlie/some-project.git; git fetch charlie`
+    git remote add charlie git@github.com:charlie/some-project.git
+    git fetch charlie
 
 She can then directly view branches using
 
-`git show charlie/bug123`
+    git show charlie/bug123
 
 Or, by using the techniques from the beginning of the chapter to create local tracking branches for contributing to Charlie’s work:
 
@@ -762,7 +766,8 @@ If Charlie does all his work on branches and never touches his master, another e
 
 
     git checkout master
-    git fetch bugfreecode; git reset —hard bugfreecode/master
+    git fetch bugfreecode
+    git reset —hard bugfreecode/master
 
 
 ### Giving credit to contributors
@@ -814,7 +819,8 @@ While I strongly advocate using a centralized repo service like GitHub, sometime
 
 Your friend will then add the repo in question to his remotes
 
-`git remote add somerepo git://your.ip.address/project-folder-name; git fetch`
+    git remote add somerepo git://your.ip.address/project-folder-name
+    git fetch
 
 Please see the `git help daemon` for further discussion on this topic.
 
