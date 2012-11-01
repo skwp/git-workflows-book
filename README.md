@@ -315,11 +315,11 @@ Using uncommit is my favorite way of resuming long running work, but if you’re
 You can then pop your changes off the stash by using `git stash pop` or `git stash apply` to apply the change without popping it off the stash. Use `git stash list` to see the contents of the stash.
 
     # do some work, prod bug comes in
-      git stash
-      git checkout prod_branch
-      # fix your prod bug and commit
-      git checkout master
-      git stash pop
+    git stash
+    git checkout prod_branch
+    # fix your prod bug and commit
+    git checkout master
+    git stash pop
 
 
 Another good use of the stash is for moving uncommitted between branches. Sometimes you start to work on something on master, or on another branch and realize the work probably needs to be moved over to a branch of its own. While you can sometimes checkout another branch and the changes will automaticaly transfer over, occasionally your changes conflict with the code on the branch, so the correct way to do this is to *stash* the changes, checkout the new branch, and then unstash them.
@@ -433,12 +433,12 @@ When you grab a file from a previous time, it sits in your index, modified. So w
 
     git status
 
-      # On branch master
-      # Changes to be committed:
-      #   (use "git reset HEAD ..." to unstage)
-      #
-      # modified:   README
-      #
+    # On branch master
+    # Changes to be committed:
+    #   (use "git reset HEAD ..." to unstage)
+    #
+    # modified:   README
+    #
 
 
 And we can see what differences it has with the current version:
@@ -740,21 +740,21 @@ She can then directly view branches using
 Or, by using the techniques from the beginning of the chapter to create local tracking branches for contributing to Charlie’s work:
 
     git branch bug123 charlie/bug123
-      # hack, hack, hack - helping charlie out
-      git commit -a -m "code review and fixing to help Charlie"
-      git push charlie bug123
+    # hack, hack, hack - helping charlie out
+    git commit -a -m "code review and fixing to help Charlie"
+    git push charlie bug123
 
-      # once the bug is done, put it into master
-      git checkout master
-      git merge --squash charlie bug123
-      git commit -m "Bug #123 - fix something" --author "Charlie "
-      git push
+    # once the bug is done, put it into master
+    git checkout master
+    git merge --squash charlie bug123
+    git commit -m "Bug #123 - fix something" --author "Charlie "
+    git push
 
 
 Charlie keeps himself in sync to the official master branch by using `pull --rebase`:
 
     git checkout master
-      git pull --rebase bugfreecode master
+    git pull --rebase bugfreecode master
 
 
 If Charlie does all his work on branches and never touches his master, another equivalent way, but perhaps slightly safer (avoiding any rebase troubles), is to reset to point to the master
@@ -832,10 +832,9 @@ Release management is all about branch management, and branching in git is easy.
 Let’s say this is the first time you’re creating a release. You’ve worked with your team to stabilize the code in *master*, and are now creating release *1.0*.
 
     grb create 1.0
-      git push
-
-      git tag tag-1.0
-      git push --tags
+    git push
+    git tag tag-1.0
+    git push --tags
 
 
 Congratulations, you now have a 1.0 branch created, and a tag called *tag-1.0* and ready for release. Note that at this moment, the tag and the branch are identical. The difference is that the branch pointer may continue to evolve as it gains new commits for prod fixes, while the tag is there permanently for future reference to the branch point.
@@ -845,11 +844,11 @@ Congratulations, you now have a 1.0 branch created, and a tag called *tag-1.0* a
 Your release is running in production, and you’ve found a bug. Let’s commit the bugfix into *master*, and then cherry-pick the same patch into the branch.
 
     git checkout master
-      # hack, hack, hack
-      git commit -a -m "Bug #123 - emergency prod fix"
-      git checkout 1.0
-      git cherry-pick -x master  # or using my alias 'git cp master'
-      git push
+    # hack, hack, hack
+    git commit -a -m "Bug #123 - emergency prod fix"
+    git checkout 1.0
+    git cherry-pick -x master  # or using my alias 'git cp master'
+    git push
 
 
 Let’s take a look at what just happened. We committed the fix into master, and then we used a git command called `cherry-pick`. This command copies a patch from one branch to another.
@@ -903,9 +902,9 @@ Now use `git branch -rv` to see the remote branches. Remember, as with any git r
 
     git branch 1.1.2 branches/1.1.2
 
-      # hack
-      git commit -a -m "made changes on the branch"
-      git svn dcommit  # goes to branch 1.1.2
+    # hack
+    git commit -a -m "made changes on the branch"
+    git svn dcommit  # goes to branch 1.1.2
 
 
 For more on git-svn, please see
@@ -924,13 +923,13 @@ branches = branches/\*/project-foo:refs/remotes/project-foo/branches/\*
 From git’s perspective, your git-svn repo is not different from any other git repo. So in order to push it out to a remote place, we follow the same steps we would for any git remote repo:
 
     git remote add origin [github url]
-      git push
+    git push
 
 
 You can now get sneaky and start pulling changes from your team via svn, and pushing it to github:
 
     git svn rebase
-      git push
+    git push
 
 
 Like magic. However, this is only recommended as a temporary solution because the svn rebase, like any rebase, will rewrite your commit id’s, causing the possibility that anyone you’re sharing code with via github may have a problem with your commits.
