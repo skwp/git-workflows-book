@@ -483,7 +483,7 @@ Since we only want to revert the one file, we’ll unstage all the changes.
 
 And now we’ll stage just the file we’re interested in.
 
-`git add filename; get ci -m "Reverting change to file"`
+`git add filename; git commit -m "Reverting change to file"`
 
 Now we’ll just throw away the rest of the changes, which we don’t care about:
 
