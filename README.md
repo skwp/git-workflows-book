@@ -68,7 +68,7 @@ The basic unit that git works with is the *changeset* (also called a *patch*). A
 
 Unlike subversion, which litters every directory in your tree with its metadata files, the entire git repo lives in one directory called `.git` at the top level of your project. Without going into too much detail, this directory contains a list of *objects* which are binary representations of your changesets, and a list of *refs* which are the human names you use to refer to your branches and tags. I recommend poking around the `.git` directory to see what's inside. Most of it is human readable and very educational.
 
-If you've just started or cloned a git project, you'll find you typically have a branch called *master*. There is nothing special about this branch other than it's the conventional way to name the main development branch &mdash; the rough equivalent of *trunk* in subversion. Git branches are nothing more than human names for a particular changeset. To verify this, just take a look at the file .git/refs/heads/master. Inside, you'll see the hash that identifies the latest commit in your repository on the master branch.
+If you've just started or cloned a git project, you'll find you typically have a branch called *master*. There is nothing special about this branch other than it's the conventional way to name the main development branch &mdash; the rough equivalent of *trunk* in subversion. Git branches are nothing more than human names for a particular changeset. To verify this, just take a look at the file `.git/refs/heads/master`. Inside, you'll see the hash that identifies the latest commit in your repository on the master branch.
 
 ### The Working Tree
 
