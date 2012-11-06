@@ -89,7 +89,7 @@ An excellent environment is the first step to enjoying a new tool. Below are sev
 
 So that you don't have to type out branch names and other things, locate the file *git-completion.bash* and add it to your startup scripts so that it executes. This typically involves adding a line to ~/.bashrc:
 
-`. /path/to/git-completion.bash`
+    . /path/to/git-completion.bash
 
 If you can't locate the file, try [downloading git-completion.bash](http://repo.or.cz/w/git.git?a=blob_plain;f=contrib/completion/git-completion.bash)
 
@@ -194,7 +194,7 @@ Unlike many of git's obscure error messages, the status screen is actually very 
 
 We stage a change for commit by adding it to the index. Because git operates on changes, and not on files, it's easy to add all changes in a particular directory:
 
-`git add public`
+    git add public
 
 This adds the changes made to file1 and file2 to the index (interchangeably referred to as the staging area). I could also do it by listing the files after the add command, or by issuing multiple add commands. If I wanted to add all available changes I could simply use `git add .` After running the command, the status shows:
 
@@ -213,7 +213,7 @@ This adds the changes made to file1 and file2 to the index (interchangeably refe
 
 You'll notice that the files that are added to the index, under "Changes to be committed" are now colored green instead of the previous red. Now to commit the two changes that have been staged, we issue the commit command:
 
-`git commit -m "This is my commit msg"`
+    git commit -m "This is my commit msg"
 
 Now we're left with the change to file2 in our working tree, and we can follow the same procedure to commit the one file.
 
@@ -229,15 +229,15 @@ To add deletions to the index, a handy shortcut is `git add -A`, which tells git
 
 Git can also help you tease apart unrelated changes within one file, and add them selectively to the index. I find that I use this rarely because I try to work on separate changes in separate branches, but if you do find yourself in this scenario, git makes it easy:
 
-`git add --patch`
+    git add --patch
 
 This will launch an interactive prompt which will go through each change in each unstaged file and ask you whether you want to stage the hunk in question. Simply answer the questions, and when you're finished you will see that the file is both in the staged and unstaged areas of the status output. To see which changes are staged, we use
 
-`git diff --cached`
+    git diff --cached
 
 The `--cached` argument means we're working with the index. Strangely this is probably the only place in git that refers to the index as a cache. Effectively this command says "give me the difference between the cache (index/staging area) and the HEAD (last commit)". You can also do a diff for the unstaged changes:
 
-`git diff`
+    git diff
 
 Note that this diff does *not* include the staged changes. This is a handy way to see the differences in both areas. Use this a couple times alongside `git status` and you should get a grasp on the technique pretty quick. I use the aliases `d` for `diff`, and `dc` for `diff --cached`, so that it's easy on the fingers.
 
@@ -255,11 +255,11 @@ Whenever you start to work on a feature or a bug, create a new branch locally. T
 
 Work on bug fix 123, making commits as you go. Realize that you actually need to start work on feature456 now.
 
-`git checkout -b feature456 master`
+    git checkout -b feature456 master
 
 Work on feature456, make commits. Now go back to the bug.
 
-`git checkout bug123`
+    git checkout bug123
 
 Make some more changes. Now we're done, so let's bring these changes back to the master.
 
@@ -270,21 +270,21 @@ Make some more changes. Now we're done, so let's bring these changes back to the
 
 Don't you love squashing bugs? The `--squash` parameter brings in all the commits from the *bug123* branch as if they were one change. It also avoids logging the change as a merge, so it looks like you just made one clean commit with all the changes from the bug123 branch as one. Once you're sure you don't need the history of working on that bug anymore, delete the branch.
 
-`git branch -D bug123`
+    git branch -D bug123
 
 I like to use the alias `nb` for new branch, so that the commands above become:
 
-`git nb feature123 master`
+    git nb feature123 master
 
 Also note that if you're creating a branch from the branch you're currently on, then the second argument can be ommitted, so if you're on the master branch already, simply use:
 
-`git nb feature123`
+    git nb feature123
 
 ### Coming back to unfinished work on a topic branch
 
 Let's say it's Friday afternoon and you're halfway through a refactoring but you want to save it until next week. A good way to remember that it's unfinished work is to log it in the comments. Simply commit your changes with a helpful message:
 
-`git commit -a -m "uncommit me: need to finish stuff in the user model"`
+    git commit -a -m "uncommit me: need to finish stuff in the user model"
 
 Note that above we used the `-a` switch which tells git to automatically stage all your changes. It's as if you ran `git add .` right before the commit. When you come in on monday, you can see your list of available branches:
 
@@ -294,9 +294,9 @@ Note that above we used the `-a` switch which tells git to automatically stage a
 
 And remembering that you were working on bug123, you check out the branch to resume work:
 
-`git checkout bug123`
+    git checkout bug123
 
-`git uncommit`
+    git uncommit
 
 The `uncommit` alias is covered in Appendix A, and is the aliased to `git reset --soft HEAD^`. Effectively, it takes you back in time to the moment right before you made the commit, with all of your changes still in the index. This means you can now examine your changes and modify them if necessary and commit again.
 
@@ -304,7 +304,7 @@ The `uncommit` alias is covered in Appendix A, and is the aliased to `git reset 
 
 The uncommit command above shows you how to resume work on a previously committed changeset. If you're simply adding a couple files or changing the commit comment on your last changeset, a quicker way to do this is
 
-`git commit --amend`, or using the alias `git amend`
+    git commit --amend`, or using the alias `git amend
 
 As usual, you'll have to `add` your changes to the index before you do this. The amend command will not create a new commit, instead it will modify the last commit. **WARNING:** never do this to a commit that you've already pushed to a remote repository.
 
@@ -359,7 +359,7 @@ Your friend may not have been following the clean changeset philosophy as you ha
 
 The `rebase -i` command is a powerful way to gain editorial capabilities over your last N commits. To launch it, use the following syntax:
 
-`git rebase -i HEAD~[N]`
+    git rebase -i HEAD~[N]
 
 Substituting `[N]` for the last N commits that you want to work with.
 
@@ -395,35 +395,35 @@ With git, you've got the entire codebase history in your hands. Did you ever wan
 
 If you're looking for a changeset and you remember you messed with an object called "foo\_bar\_baz" but don't remember quite when, you can search for it using the log. The `-p` parameter tells git to print the actual contents of the patch so you can see the changes.
 
-`git log -p -S"foo_bar_baz"`
+    git log -p -S"foo_bar_baz"
 
 If you know you made the change last week and want to save some time in the search, git understands english timeframes:
 
-`git log -p -S"foo_bar_baz" --since="1 week ago"`
+    git log -p -S"foo_bar_baz" --since="1 week ago"
 
 If, on the other hand, you want to search for a commit message (really handy if you put issue tracking numbers into your commit messages, something I highly recommend):
 
-`git log -p --grep="Ticket #382"`
+    git log -p --grep="Ticket #382"
 
 ### Throwing away all changes
 
 If you've made a mistake and want to go back to your last checkout, ignoring anything that's in the working tree or index.
 
-`git checkout -f`
+    git checkout -f
 
 ### Restoring a file or directory to a past state
 
 The most basic type of time traveling is grabbing a set of changes from your HEAD. Let's say you made some changes to a file (in this case, a README) that just aren't working. Let's throw those away.
 
-`git checkout README`
+    git checkout README
 
 But what you're really doing here, is checking out the file from your HEAD (equivalent to `git checkout HEAD README`). You can also check out the state of the file from any given commit:
 
-`git checkout c5d563fae README`
+    git checkout c5d563fae README
 
 Now we've gone and grabbed the file from that particular commit set. Since branches and tags are just labels for particular commit hashes, we can also do the same thing use branch names.
 
-`git checkout experimental_branch README`
+    git checkout experimental_branch README
 
 But what if you know the file was working last week, now it's broken, and you want to take a look at what it was like? Easy:
 
@@ -443,7 +443,7 @@ When you grab a file from a previous time, it sits in your index, modified. So w
 
 And we can see what differences it has with the current version:
 
-`git diff --cached`
+    git diff --cached
 
 We use --cached because the file is in the index.
 
@@ -453,7 +453,7 @@ If you've done something unsavory in your repository and want to really reset yo
 
 Let's say you committed or pulled in 3 commits and now you realized you no longer want them:
 
-`reset --hard HEAD~3`
+    git reset --hard HEAD~3
 
 This command tells us to revert the repository state to that of 3 commits ago. **Note:** this will effectively throw away your last 3 commits and reset your current branch's HEAD to point to HEAD~3, 3 commits ago.
 
@@ -463,7 +463,7 @@ As we learned in Chapter 2, while working with our local repo we have a number o
 
 However, git offers you an easy way to undo a patch by committing a change that effectively reverses the patch in question. The simplest usage is to revert an entire changeset:
 
-`git revert 850150f`
+    git revert 850150f
 
 This creates a patch that is the opposite of changeset 850150f and commits it to your repo.
 
@@ -471,15 +471,15 @@ This creates a patch that is the opposite of changeset 850150f and commits it to
 
 This slightly more advanced workflow using `revert` lets you undo the changes to one file only. We'll do this by asking git to create the reverting changeset but not commit it, and modify it before it goes in. First, we'll figure out which changeset it changed in:
 
-`git log filename`
+    git log filename
 
 Revert that changeset without committing it. This will put the reversion into your index.
 
-`git revert -n [hash]`
+    git revert -n [hash]
 
 Since we only want to revert the one file, we'll unstage all the changes.
 
-`git unstage`
+    git unstage
 
 And now we'll stage just the file we're interested in.
 
@@ -488,7 +488,7 @@ And now we'll stage just the file we're interested in.
 
 Now we'll just throw away the rest of the changes, which we don't care about:
 
-`git checkout -f`
+    git checkout -f
 
 ## Chapter 4 - Remote Collaboration and Code Review
 
@@ -522,19 +522,19 @@ First, add a *remote* (git's term for a remote repo) called *origin* (this is si
 
 You can always see all the remotes you have:
 
-`git remote -v`
+    git remote -v
 
 Once you have the remote, you'll push the code you have out:
 
-`git push origin master`
+    git push origin master
 
 This command tells git to push all the changes you've made on your *master* branch, to the *master* branch on the remote called *origin*. It's actually a shortcut syntax. Because your local and remote branches are both named *master*, you don't have to specify the remote branch name. If you wanted to call your local branch *foobar* instead, you could use the syntax
 
-`git push origin foobar:master`
+    git push origin foobar:master
 
 Git offers a secondary shortcut convenience. If you name all your local branches identically to your remotes, then you can just use:
 
-`git push`
+    git push
 
 This will push out changes on all branches that have matching branches on the remote end.
 
@@ -547,7 +547,7 @@ Git is pretty low level when it comes to managing local and remote branches and 
 Homepage: http://github.com/webmat/git\_remote\_branch/tree/master
 Installation (you will need rubygems for this):
 
-`sudo gem install git_remote_branch --include-dependencies`
+    sudo gem install git_remote_branch --include-dependencies
 
 Once you've installed the tool, go ahead and run `grb` without arguments to see the help.
 
@@ -555,11 +555,11 @@ Once you've installed the tool, go ahead and run `grb` without arguments to see 
 
 If you're working on a long lived topic branch for a particular feature, it's a good idea to back it up to your remote. It's also useful to push it out to the remote so that others can look at it and collaborate with you. To push an existing branch to the remote:
 
-`git push -u origin [branchname]`
+    git push -u origin [branchname]
 
 If you haven't yet created the branch,
 
-`git checkout [branchname]`
+    git checkout [branchname]
 
 Which both creates the local branch and pushes it to the remote.
 
@@ -567,15 +567,15 @@ Which both creates the local branch and pushes it to the remote.
 
 When you're done with an experimental branch, you delete it locally with:
 
-`git branch -D [branchname]`
+    git branch -D [branchname]
 
 But your branch is still active on the remote. To delete it, git has a slightly obscure syntax
 
-`git push origin :[branchname]`
+    git push origin :[branchname]
 
 Of course, `grb` makes it much simpler to do both in one shot
 
-`grb delete [branchname]`
+    grb delete [branchname]
 
 ### Pulling changes from a remote
 
@@ -587,17 +587,17 @@ Suppose you're working on a branch called *bug123* at your github repository. A 
 
 First, we fetch the latest changes from the remote repo. This will download *everything* in the remote repo into our local repo. This includes all remote branches. Remember that with git, you're storing the entire repository locally.
 
-`git fetch origin`
+    git fetch origin
 
 To show all the branches we now have, use:
 
-`git branch -av`
+    git branch -av
 
 The `-a` tells us we want to see all branches (including remote ones, you can see *only* remote branches by using `-r`), and the `-v` gives us information about the latest change on each branch. Note that the branches listed as "origin/[branchname]" are called *remote tracking branches*. Think of these branches as local read-only mirrors of the remote repo.
 
 If you ever try to check out a remote tracking branch directly:
 
-`git checkout origin/master`
+    git checkout origin/master
 
 You will get a warning from git that looks like this:
 
@@ -608,20 +608,20 @@ You will get a warning from git that looks like this:
 
 So in order to actually work with the remote branch, we'll need a local tracking branch set up to track the remote branch in question:
 
-`git checkout -b bug123 origin/bug123`
-
-`Branch bug123 set up to track remote branch refs/remotes/origin/master.`
+    git checkout -b bug123 origin/bug123
+    Branch bug123 set up to track remote branch refs/remotes/origin/master.
+    Switched to a new branch 'bug123'
 
 
 ### Pulling changes using merge
 
 Once you've fetched all the remote branches and opened up the local tracking branch you want to work with, you'll merge the latest changes from the remote:
 
-`git merge origin/bug123`
+    git merge origin/bug123
 
 To automate the fetch and merge steps, git offers a `pull` command that does both in one shot:
 
-`git pull origin bug123`
+    git pull origin bug123
 
 **Note:** whenever you merge, a commit message will be left in your local repo indicating the merge. This is because to git, there is no such thing as a central repo. Even if you and your team are using github to collaborate, each of your individual repos is treated as an equal, and merges are logged there just as they are anywhere else.
 
@@ -638,7 +638,7 @@ You can grab his changes, and replay your changes on top by using the same rebas
 
 There is no difference between this and the rebase usage covered in Chapter 2, other than that we're rebasing from a remote tracking branch. Git also offers a shortcut to pull in this manner:
 
-`git pull --rebase origin bug123`
+    git pull --rebase origin bug123
 
 If this is the way you prefer to work, you can have git always rebase instead of merge your pulls by editing your *.git/config* file for the branch in question:
 
@@ -684,7 +684,7 @@ Alice, who is the owner of the bug, now decides the bug is good to go, and merge
 
 Since the bug is now in master, if there is no long term need to keep its history around, Alice deletes the branch from her local repo, and the remote.
 
-`grb delete bug123`
+    grb delete bug123
 
 ### Squashing for code review
 
@@ -780,7 +780,7 @@ The nice thing is that git remembers authors, and you can use pattern matching i
 
 Once you're finished collaborating on remote branch bug123, one of the developers will delete the remote branch, but everyone else will still have that branch listed in their `git branch -a` output. To remove any stale tracking branches that are already gone from the remote, simply use
 
-`git remote prune origin`
+    git remote prune origin
 
 Where *origin* is the name of the remote. Do this for every remote you have periodically to maintain a clean branch list.
 
@@ -801,7 +801,7 @@ Simply edit the file to remove the ">>" markers, leaving the correct line of cod
 
 You'll also notice that the conflicted file didn't get added to the index, so once you've resolved all your conflicts, simply
 
-`git add .`
+    git add .
 
 To add all the changes to your index, and commit.
 
@@ -815,7 +815,7 @@ http://jdwyah.blogspot.com/2008/09/merging-with-git-conflicts.html
 
 While I strongly advocate using a centralized repo service like GitHub, sometimes you just have a local project you want to share with a friend or two. You can fire up a git repository server very quickly using the following command:
 
-`git daemon --reuseaddr --verbose --export-all --base-path=/path/to/root/of/repos`
+    git daemon --reuseaddr --verbose --export-all --base-path=/path/to/root/of/repos
 
 Your friend will then add the repo in question to his remotes
 
@@ -867,15 +867,15 @@ Note also, that since `push` will push out all changes on matching branches to t
 
 The gitalias file provided in the appendix offers a very handy changelog alias which generates a bulleted list of changes. Since you've tagged your last branch point, we can easily generate a list of changes from that branch point to the current HEAD of master:
 
-`git changelog tag-1.0..master`
+    git changelog tag-1.0..master
 
 If you did not tag, you can find the original point at which the branch diverged, but I have found this is sometimes error prone. The `merge-base` command will give you the last commit which is shared by two branches:
 
-`git merge-base 1.0 master`
+    git merge-base 1.0 master
 
 You can then use that commit to generate your changelog
 
-`git changelog [commit obtained from merge-base]..master`
+    git changelog [commit obtained from merge-base]..master
 
 A great way to introduce git into your organization is&hellip;not to! Your team or management can be resistant to change, but that doesn't mean you can't start reaping the benefits of git's fully offline repositories, fast logs, topic branches, and changeset management.
 
@@ -890,7 +890,7 @@ In this chapter, we'll learn how to start using git on top of svn transparently,
 
 With pure git, you use `git clone` to make a copy of someone's repository to do work on it. With svn, we use `git svn clone`.
 
-`git svn clone [svn-url]`
+    git svn clone [svn-url]
 
 Note that the initial clone command may take some time as it copies your entire subversion repo all the way to the beginning of time and creates an analogous git repo. The git repo typically takes up a fraction of the space that the original svn repo did.
 
