@@ -251,7 +251,7 @@ Though the methods described above are good for quick hacks, when working on lar
 
 Whenever you start to work on a feature or a bug, create a new branch locally. This branch will live for the duration of the work you do, and then we'll squash it into one clean changeset back into the master, following our *one commit per feature* philosophy.
 
-`git checkout -b bug123 master`,
+    git checkout -b bug123 master
 
 Work on bug fix 123, making commits as you go. Realize that you actually need to start work on feature456 now.
 
