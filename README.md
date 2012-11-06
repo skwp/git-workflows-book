@@ -919,10 +919,12 @@ For more on git-svn, please see
 
 If your project uses an unconventional branch layout in subversion, for example branches/1.0.1/module instead of module/branches/1.0.1, you can still use git-svn by making a modification to your .git/config file to properly map the branches. Note the special *** syntax in the branches line below.
 
+```
 [svn-remote "svn"]
 url = http://company.com/svn/projects
 fetch = trunk/project-foo:refs/remotes/project-foo/trunk
 branches = branches/\*/project-foo:refs/remotes/project-foo/branches/\*
+```
 
 ### Migrating to git: keeping svn and git in sync
 
