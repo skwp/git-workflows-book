@@ -831,7 +831,305 @@ Release management is all about branch management, and branching in git is easy.
 *   A release is cut by creating a new branch from master, or by branching from the last release branch and cherry-picking selected changesets. The master branch is tagged at the release point.
 *   Emergency fixes to production are cherry-picked into the release branch.
 
-## Chapter 5 - Release Management
+## Chapter 5 - The small team workflow
+
+Let's assume a small team where all members are equal. This could be
+the beginning of a new project, where the members are founders, and
+thus they are all drivers of the project. Although members work
+independently in local private branches, they could benefit from a
+common shared branch (the "project master") that integrates the
+efforts of everyone.
+
+- How to achieve this in a sane way in distributed version control?
+
+- How should members go about integrating their work into the project
+  master?
+
+- How should members get the latest and greatest improvements by the
+  other members?
+
+One good way to answer all that is effective use of feature branches
+combined with code reviews. The basic principles to make this work:
+
+- There is a shared project master that all team members can write to
+
+- All changes are done exclusively on feature branches
+
+- When a feature branch is ready, the author of the branch asks
+  another team member to perform code review
+
+- The reviewer should understand the changes and communicate with the
+  author as necessary, as well as ask for bugfixes or other
+  improvements. In the end, the reviewer merges the branch into the
+  project master
+
+This setup has some interesting implications:
+
+- Feature branch authors don't have to deal with conflicts (not in VCS
+  terms, at least ;-). The only point of conflict is when merging the
+  feature branch into the project master, which is performed by the
+  reviewer. This makes it easy for newcomers to join the project: in
+  the beginning they can focus on contributing features, and let the
+  more experienced members handle code review and thus merging.
+
+- The workflow enforces the practice of code review as the standard
+  within the team, which is can significantly improve the quality of
+  software projects:
+  http://www.codinghorror.com/blog/2006/01/code-reviews-just-do-it.html
+
+In this article we focus on implementing this workflow on GitHub.
+However, this is not a requirement, you can do the same on a private
+server with ssh access with some minor adjustments.
+
+
+### Setting up a team repository on GitHub
+
+One of our assumptions is a project master that all members have write
+access to. To achieve this on GitHub, we need to create an
+*organization* for the project. Go to **Settings / Organizations** to
+do that and follow the instructions, this is really quick and easy.
+
+Once the organization is ready, add the project members to it and
+setup a repository the same way you would in any personal project.
+Members will be able to clone from and push to this repository.
+
+To get the project repository from the team account:
+
+    # clone the repository project123 from the user team123
+    hub clone team123/project123
+
+Here `team123` is of course the GitHub organization, `project123` is
+the repository created in the organization.
+
+
+### Working on a feature branch
+
+All new development should start by branching from the latest version
+of the master. So first let's bring your local master up to date:
+
+    # switch to master
+    git checkout master
+
+    # update from the remote
+    git pull
+
+*(Of course you can skip this if you have just cloned the repository,
+then it is already up to date.)*
+
+Create a new feature branch:
+
+    # create a feature branch and switch the working tree to it
+    git checkout -b feature123
+
+Work on the new feature:
+
+    # hack, hack, hack
+    git add file1 file2
+    git commit -m 'hack hack hack'
+
+So far the feature branch exists only on your computer. To let others
+see it, you may want to push it to the repository from time to time:
+
+    # push feature branch to share with others
+    git push origin feature123
+
+Note that you only need to specify the push destination
+`origin feature123` the first time you do it. Afterwards it will be
+enough to simply `git push`.
+
+When the feature is ready, push it to the repository and ask a team
+member to perform the code review.
+
+At this point if you would like to work on another feature, you should
+go back to the first step, update your local master to bring in the
+changes done in the master by your other teammates, starting a new
+cycle.
+
+
+### Performing the code review
+
+The purpose of this step is to review the work of a fellow teammate,
+and if it's all good, merge it into the master to make the new feature
+available to everyone.
+
+First, bring the local master up to date:
+
+    # switch to master
+    git checkout master
+
+    # update all branches from the remote
+    git pull
+
+There are at least two ways to review the changes in the branch:
+
+1. Review all the commits as one large changeset
+
+2. Review the commits of the branch one by one
+
+Both methods have different advantages, but the end result is the
+same.
+
+
+#### Reviewing all commits as one large changeset
+
+By default Git commits the merge automatically, and that way the
+changes will be spread out across the individual commits. To prevent
+this behavior you can use the `--no-commit` flag.
+
+Also, if the merge is a *fast-forward*, that is, the master hasn't
+changed since the feature branch was created, then Git will still go
+ahead and commit it. So to prevent that too you can use the `--no-ff`
+flag.
+
+So the command to perform the merge in a way to see the changes in a
+single changeset:
+
+    # merge the branch without committing anything
+    git merge --no-commit --no-ff origin/feature123
+
+Then all the changes will be added to the index (= *staged*), waiting
+to be committed. You can review them using `git diff --staged` or
+`gitk`.
+
+Note that just because you can see all the changes in one changeset,
+that does not mean the original commits are "squashed". After you
+commit the merge, the individual commits will be correctly preserved
+in the revision history.
+
+After verifying the changes, if everything looks good, then commit
+the merge and push the local master to the remote:
+
+    # commit the merge
+    git commit -m 'merged the fantastic feature123'
+
+    # update the remote master
+    git push
+
+An easy way to verify that the individual commits have been preserved
+in the history is with `gitk`, as it gives a visual presentation of the
+feature branch with all its commits.
+
+On the other hand, things may not always go so well with a merge, for
+example:
+
+- The changeset may be too large to understand all at once
+
+- You disagree with some of the changes and would like to ask the
+  author to work a bit more on the branch
+
+- There were hopelessly too many conflicts you would rather ask
+  somebody else to deal with it
+
+If for any reason you would like to cancel the merge and perhaps later
+restart with a different "merging strategy", you can undo everything
+and revert back to the original clean state of your master:
+
+    # undo the merge
+    git reset --hard
+
+The advantage of reviewing all the commits as one changeset is that
+often it is easier to see all the related changes this way. Another
+advantage is the very straightforward rollback plan.
+
+The disadvantage is that it might be too much to handle all at
+once if there were too many changes in the branch. In that case you
+can just roll back and try something else.
+
+
+#### Reviewing the commits of the branch one by one
+
+When merging from a branch, by default Git automatically commits the
+merged changes, which you can review later using the usual history
+browsing operations. To perform the merge:
+
+    # merge the branch
+    git merge origin/feature123
+
+An easy way to review them is with `gitk`, or you can use `git diff`
+and `git log`.
+
+After verifying the changes, if everything looks good, then push
+the local master to the remote:
+
+    # update the remote master
+    git push
+
+If things did not go so well and you prefer to cancel the merge
+and revert back to the original clean state of your master:
+
+    # reset branch to the same state as origin/master
+    git reset --hard origin/master
+
+The advantage of this method is probably its simplicity: if you trust
+the author and you are pretty sure that the branch will be good to
+merge, then it may be tempting to perform these few simple steps.
+
+The disadvantage is that in case you need to roll back, the procedure
+is a bit unnatural: you have to rewrite the history just to undo
+something that should not have been in the history in the first
+place...
+This kind of backward process invites errors, such as an accidental
+`git push` in the wrong terminal window or something...
+
+
+### Extra tips
+
+Here are some related extra tips, in semi-random order.
+
+----
+
+While in the middle of the merge when reviewing all changes in the
+branch all at once, you can see the individual commit messages with:
+
+    git log origin/feature123
+
+----
+
+Note that when you do `git pull`, not only the current branch will be
+download/updated but all the branches in the repository. If you don't
+want to get all the "junk", you can specify just the branch you want
+to update like this:
+
+    # update local master from remote
+    git pull origin master
+
+----
+
+Another way to review all the changes as one changeset is simply with
+`git diff`:
+
+    # diff from current branch to another
+    git diff origin/feature123
+
+
+### Summary
+
+Despite the long (I'd like to think "in-depth") explanation, this
+workflow is actually just a matter of a simple cycle:
+
+1. Update your master
+
+2. Create a new branch
+
+3. Hack, hack, hack
+
+4. Ask for a code review and go back to step 1
+
+The code review part is perhaps the biggest value of the workflow.
+However, codifying such good practice in the workflow is only half of
+the victory, the team members have to take it seriously to be
+meaningful.
+
+Although this is intended for small teams where all members are
+drivers with equal commit rights, the workflow can be scaled to larger
+teams too with a simple twist: non-core contributors don't have write
+acccess to the project master and don't do code reviews. They publish
+their branches where core committers can see them and perform the code
+review as usual. That's called the *gatekeeper workflow*, which can be
+further scaled up to a *Commander-Lieutenant workflow*.
+
+
+## Chapter 6 - Release Management
 
 ### Creating the release branch
 
