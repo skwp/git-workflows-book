@@ -35,7 +35,7 @@ If you create a model in your head of what git is doing, you'll be quickly on yo
 If you are new to git, I highly urge you to read at least one of the following resources:
 
  * [Git Community Book](http://book.git-scm.com/index.html)
- * [Git Internals by Peepcode]("http://peepcode.com/products/git-internals-pdf")
+ * [Git Internals by Peepcode](https://peepcode.com/products/git-internals-pdf)
 
 As the Peepcode book says, "Git != Subversion + Magic!". This is an important mantra that everyone reading this book should understand. Commit some time to learning what git does, and you will be rewarded. However, if you do decide to bypass the intro books, this book will give you enough of an overview so that you can dive right in. It will also provide you with a handy list of aliases making certain features of git easier to work with.
 
