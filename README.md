@@ -957,8 +957,123 @@ improve my understanding of git internals every time someone does something craz
 from the top of an organization, as you'll be met with a lot of frustration. People are comfortable in their source control and they don't want to learn new systems without seeing the benefit first.
 Show them the benefit on your machine, then invite them to transition theirs.
 
-Once you have transitioned a handful of people to git, let them too become experts, and spread the git throughout the organization. Soon enough, most of the dev team will be using git on 
+Once you have transitioned a handful of people to git, let them too become experts, and spread the git throughout the organization. Soon enough, most of the dev team will be using git on
 top of svn. At this point, you can simply point this out, and lead the political transformation to pure git development. Github alleviates many concerns of having centralized repositories,
 so whip out your credit card, get an account for a few bucks a month, and have at it. Good luck!
 
 Copyright 2011, [Yan Pritzker](http://yanpritzker.com). All Rights Reserved.
+
+
+### Appendix A - The .gitconfig
+
+    [color]
+      ui = true
+    [color "branch"]
+      current = yellow reverse
+      local = yellow
+      remote = green
+    [color "diff"]
+      meta = yellow bold
+      frag = magenta bold
+      old = red bold
+      new = green bold
+    [alias]
+      # add
+      a = add                           # add
+      chunkyadd = add --patch           # stage commits chunk by chunk
+
+      # branch
+      b = branch -v                     # branch (verbose)
+
+      # commit
+      c = commit -m                     # commit with message
+      ca = commit -am                   # commit all with message
+      ci = commit                       # commit
+      amend = commit --amend            # ammend your last commit
+      ammend = commit --amend           # ammend your last commit
+
+      # checkout
+      co = checkout                     # checkout
+      nb = checkout -b                  # create and switch to a new branch (mnemonic: "git new branch branchname...")
+
+      # cherry-pick
+      cp = cherry-pick -x               # grab a change from a branch
+
+      # diff
+      d = diff                          # diff unstaged changes
+      dc = diff --cached                # diff staged changes
+      last = diff HEAD^                 # diff last committed change
+
+      # log
+      l = log --graph --date=short
+      changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+      short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+      changelog = log --pretty=format:\" * %s\"
+      shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+
+      # pull
+      pl = pull                         # pull
+
+      # push
+      ps = push                         # push
+
+      # rebase
+      rc = rebase --continue            # continue rebase
+      rs = rebase --skip                # skip rebase
+
+      # remote
+      r = remote -v                     # show remotes (verbose)
+
+      # reset
+      unstage = reset HEAD              # remove files from index (tracking)
+      uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
+      filelog = log -u                  # show changes to a file
+      mt = mergetool                    # fire up the merge tool
+
+      # stash
+      ss = stash                        # stash changes
+      sl = stash list                   # list stashes
+      sa = stash apply                  # apply stash (restore changes)
+      sd = stash drop                   # drop stashes (destory changes)
+
+      # status
+      s = status                        # status
+      st = status                       # status
+      stat = status                     # status
+
+      # tag
+      t = tag -n                        # show tags with <n> lines of each tag message
+
+      # svn helpers
+      svnr = svn rebase
+      svnd = svn dcommit
+      svnl = svn log --oneline --show-commit
+    [format]
+      pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+    [mergetool]
+      prompt = false
+    [mergetool "mvimdiff"]
+      cmd="mvim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
+      keepbackup=false
+    [merge]
+      summary = true
+      verbosity = 1
+      tool = mvimdiff
+    [apply]
+      whitespace = nowarn
+    [branch]
+      autosetupmerge = true
+    [push]
+      # 'git push' will push the current branch to its tracking branch
+      # the usual default is to push all branches
+      default = tracking
+    [core]
+      autocrlf = false
+      editor = vim
+      excludesfile = ~/.yadr/git/gitignore
+    [advice]
+      statusHints = false
+    [diff]
+      # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
+      # instead of a/b/c/d as prefixes for patches
+      mnemonicprefix = true
