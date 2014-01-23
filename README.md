@@ -306,9 +306,7 @@ The `uncommit` alias is covered in Appendix A, and is the aliased to `git reset 
 
 ### Fixing the last commit
 
-The uncommit command above shows you how to resume work on a previously committed changeset. If you're simply adding a couple files or changing the commit comment on your last changeset, a quicker way to do this is
-
-    git commit --amend`, or using the alias `git amend
+The uncommit command above shows you how to resume work on a previously committed changeset. If you're simply adding a couple files or changing the commit comment on your last changeset, a quicker way to do this is `git commit --amend`, or using the alias `git amend`.
 
 As usual, you'll have to `add` your changes to the index before you do this. The amend command will not create a new commit, instead it will modify the last commit. **WARNING:** never do this to a commit that you've already pushed to a remote repository.
 
