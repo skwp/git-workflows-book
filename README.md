@@ -280,7 +280,7 @@ I like to use the alias `nb` for new branch, so that the commands above become:
 
     git nb feature123 master
 
-Also note that if you're creating a branch from the branch you're currently on, then the second argument can be ommitted, so if you're on the master branch already, simply use:
+Also note that if you're creating a branch from the branch you're currently on, then the second argument can be omitted, so if you're on the master branch already, simply use:
 
     git nb feature123
 
