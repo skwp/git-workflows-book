@@ -204,15 +204,15 @@ This adds the changes made to file1 and file3 to the index (interchangeably refe
 
     # On branch master
     # Changes to be committed:
-    #   (use "git reset HEAD ..." to unstage)
+    #   (use "git reset HEAD <file>..." to unstage)
     #
-    # modified:   public/file1
-    # modified:   public/file3
+    #       modified:   public/file1
+    #       modified:   public/file3
     #
-    # Changed but not updated:
-    #   (use "git add ..." to update what will be committed)
+    # Untracked files:
+    #   (use "git add ..." to include in what will be committed)
     #
-    # modified:   file2
+    #       file2
 
 
 You'll notice that the files that are added to the index, under "Changes to be committed" are now colored green instead of the previous red. Now to commit the two changes that have been staged, we issue the commit command:
