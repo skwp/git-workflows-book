@@ -181,14 +181,18 @@ Before we get to topic branches and keeping different workspace for your bugs an
 Let's say you've been hacking away for a couple hours and now you've got two different sets of changes in your working tree. We run `git status` to see what's available.
 
     # On branch master
-    # Changed but not updated:
-    #   (use "git add ..." to update what will be committed)
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
     #
-    # modified:   public/file1
-    # modified:   public/file3
-    # modified:   file2
+    #       modified:   public/file1
+    #       modified:   public/file3
     #
-
+    # Untracked files:
+    #   (use "git add <file>..." to include in what will be commited)
+    #
+    #       file2
+    #
 
 Unlike many of git's obscure error messages, the status screen is actually very friendly and explains what to do. On the status screen above we see we have modified two files and added a new file. But it turns out that 'file1' and 'file3' are part of a bugfix, and 'file2' is an unrelated change. Using the color settings outlined in Chapter 1, you'll see the files shown in red, indicating that they are not yet staged for commit.
 
