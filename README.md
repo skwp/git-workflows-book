@@ -249,7 +249,7 @@ Of course, diff takes more arguments, so that you can compare to something other
 
 ### Using topic branches
 
-Though the methods described above are good for quick hacks, when working on larger bugs or features, you can start to use branches to separate your work into workspaces and work on multiple thing without them interfering with each other.
+Though the methods described above are good for quick hacks, when working on larger bugs or features, you can start to use branches to separate your work into workspaces and work on multiple things without them interfering with each other.
 
 ### One branch per bug
 
