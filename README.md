@@ -389,7 +389,7 @@ The screen offers a clean set of instructions to follow. Simply edit the file an
 
 You can [learn more about interactive rebasing at git-scm.com](http://book.git-scm.com/4\_interactive\_rebasing.html)
 
-With git, you've got the entire codebase history in your hands. Did you ever want to go back to yesterday's state, or last week before you broke a particular feature? Git makes it not only easy, but very fast. Let's look at a couple usecases.
+With git, you've got the entire codebase history in your hands. Did you ever want to go back to yesterday's state, or last week before you broke a particular feature? Git makes it not only easy, but very fast. Let's look at a couple use cases.
 
 ## Chapter 3 - Time Traveling for Fun and Profit
 
