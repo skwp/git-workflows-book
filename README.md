@@ -196,7 +196,7 @@ We stage a change for commit by adding it to the index. Because git operates on 
 
     git add public
 
-This adds the changes made to file1 and file2 to the index (interchangeably referred to as the staging area). I could also do it by listing the files after the add command, or by issuing multiple add commands. If I wanted to add all available changes I could simply use `git add .` After running the command, the status shows:
+This adds the changes made to file1 and file3 to the index (interchangeably referred to as the staging area). I could also do it by listing the files after the add command, or by issuing multiple add commands. If I wanted to add all available changes I could simply use `git add .` After running the command, the status shows:
 
     # On branch master
     # Changes to be committed:
