@@ -192,7 +192,6 @@ Let's say you've been hacking away for a couple hours and now you've got two dif
     #   (use "git add <file>..." to include in what will be commited)
     #
     #       file2
-    #
 
 Unlike many of git's obscure error messages, the status screen is actually very friendly and explains what to do. On the status screen above we see we have modified two files and added a new file. But it turns out that 'file1' and 'file3' are part of a bugfix, and 'file2' is an unrelated change. Using the color settings outlined in Chapter 1, you'll see the files shown in red, indicating that they are not yet staged for commit.
 
