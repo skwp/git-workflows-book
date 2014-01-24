@@ -79,7 +79,7 @@ The working tree is the set of files you're currently working with. To start wor
 There is a place interchangeably known as the index, cache, or staging area. This is where you put your changes before they are ready to be comitted to the repository. You'll learn more about the index in Chapter 2, but for now just think of the index as a place that lets you selectively commit changes you make. For example, if you've made a set of file modifications, but it turns out they are two unrelated changes, you can add the appropriate half first to the index, make the commit, and then add the second half and make another commit.
 
 A great image of the git workflow and all the parts of the repo is at :
-![](http://osteele.com/images/2008/git-transport.png)
+![](http://assets.osteele.com/images/2008/git-transport.png)
 
 For more introduction to how git works, please see PeepCode's Git Internals book.
 
@@ -181,14 +181,17 @@ Before we get to topic branches and keeping different workspace for your bugs an
 Let's say you've been hacking away for a couple hours and now you've got two different sets of changes in your working tree. We run `git status` to see what's available.
 
     # On branch master
-    # Changed but not updated:
-    #   (use "git add ..." to update what will be committed)
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
     #
-    # modified:   public/file1
-    # modified:   public/file3
-    # modified:   file2
+    #       modified:   public/file1
+    #       modified:   public/file3
     #
-
+    # Untracked files:
+    #   (use "git add <file>..." to include in what will be commited)
+    #
+    #       file2
 
 Unlike many of git's obscure error messages, the status screen is actually very friendly and explains what to do. On the status screen above we see we have modified two files and added a new file. But it turns out that 'file1' and 'file3' are part of a bugfix, and 'file2' is an unrelated change. Using the color settings outlined in Chapter 1, you'll see the files shown in red, indicating that they are not yet staged for commit.
 
@@ -196,19 +199,19 @@ We stage a change for commit by adding it to the index. Because git operates on 
 
     git add public
 
-This adds the changes made to file1 and file2 to the index (interchangeably referred to as the staging area). I could also do it by listing the files after the add command, or by issuing multiple add commands. If I wanted to add all available changes I could simply use `git add .` After running the command, the status shows:
+This adds the changes made to file1 and file3 to the index (interchangeably referred to as the staging area). I could also do it by listing the files after the add command, or by issuing multiple add commands. If I wanted to add all available changes I could simply use `git add .` After running the command, the status shows:
 
     # On branch master
     # Changes to be committed:
-    #   (use "git reset HEAD ..." to unstage)
+    #   (use "git reset HEAD <file>..." to unstage)
     #
-    # modified:   public/file1
-    # modified:   public/file3
+    #       modified:   public/file1
+    #       modified:   public/file3
     #
-    # Changed but not updated:
-    #   (use "git add ..." to update what will be committed)
+    # Untracked files:
+    #   (use "git add ..." to include in what will be committed)
     #
-    # modified:   file2
+    #       file2
 
 
 You'll notice that the files that are added to the index, under "Changes to be committed" are now colored green instead of the previous red. Now to commit the two changes that have been staged, we issue the commit command:
@@ -245,7 +248,7 @@ Of course, diff takes more arguments, so that you can compare to something other
 
 ### Using topic branches
 
-Though the methods described above are good for quick hacks, when working on larger bugs or features, you can start to use branches to separate your work into workspaces and work on multiple thing without them interfering with each other.
+Though the methods described above are good for quick hacks, when working on larger bugs or features, you can start to use branches to separate your work into workspaces and work on multiple things without them interfering with each other.
 
 ### One branch per bug
 
@@ -276,7 +279,7 @@ I like to use the alias `nb` for new branch, so that the commands above become:
 
     git nb feature123 master
 
-Also note that if you're creating a branch from the branch you're currently on, then the second argument can be ommitted, so if you're on the master branch already, simply use:
+Also note that if you're creating a branch from the branch you're currently on, then the second argument can be omitted, so if you're on the master branch already, simply use:
 
     git nb feature123
 
@@ -302,9 +305,7 @@ The `uncommit` alias is covered in Appendix A, and is the aliased to `git reset 
 
 ### Fixing the last commit
 
-The uncommit command above shows you how to resume work on a previously committed changeset. If you're simply adding a couple files or changing the commit comment on your last changeset, a quicker way to do this is
-
-    git commit --amend`, or using the alias `git amend
+The uncommit command above shows you how to resume work on a previously committed changeset. If you're simply adding a couple files or changing the commit comment on your last changeset, a quicker way to do this is `git commit --amend`, or using the alias `git amend`.
 
 As usual, you'll have to `add` your changes to the index before you do this. The amend command will not create a new commit, instead it will modify the last commit. **WARNING:** never do this to a commit that you've already pushed to a remote repository.
 
@@ -387,7 +388,7 @@ The screen offers a clean set of instructions to follow. Simply edit the file an
 
 You can [learn more about interactive rebasing at git-scm.com](http://book.git-scm.com/4\_interactive\_rebasing.html)
 
-With git, you've got the entire codebase history in your hands. Did you ever want to go back to yesterday's state, or last week before you broke a particular feature? Git makes it not only easy, but very fast. Let's look at a couple usecases.
+With git, you've got the entire codebase history in your hands. Did you ever want to go back to yesterday's state, or last week before you broke a particular feature? Git makes it not only easy, but very fast. Let's look at a couple use cases.
 
 ## Chapter 3 - Time Traveling for Fun and Profit
 
@@ -437,7 +438,7 @@ When you grab a file from a previous time, it sits in your index, modified. So w
     # Changes to be committed:
     #   (use "git reset HEAD ..." to unstage)
     #
-    # modified:   README
+    #       modified:   README
     #
 
 
@@ -544,7 +545,7 @@ This will push out changes on all branches that have matching branches on the re
 
 Git is pretty low level when it comes to managing local and remote branches and keeping them in sync. Enter git-remote-branch: a great tool that helps you automate day to day operations on remote branches. As a bonus, it shows you exactly what it's doing under the hood so you can learn more about how git works. The rest of this chapter will assume you have git-remote-branch installed, and are using the `grb` command.
 
-Homepage: http://github.com/webmat/git\_remote\_branch/tree/master
+Homepage: http://github.com/webmat/git_remote_branch/tree/master
 Installation (you will need rubygems for this):
 
     sudo gem install git_remote_branch --include-dependencies
@@ -601,15 +602,26 @@ If you ever try to check out a remote tracking branch directly:
 
 You will get a warning from git that looks like this:
 
-    Note: moving to "origin/master" which isn't a local branch
-      If you want to create a new branch from this checkout, you may do so
-      (now or later) by using -b with the checkout command again. Example:
-        git checkout -b
+    Note: checking out 'origin/master'.
+
+    You are in 'detached HEAD' state. You can look around, make experimental
+    changes and commit them, and you can discard any commits you make in this
+    state without impacting any branches by performing another checkout.
+
+    If you want to create a new branch to retain commits you create, you may
+    do so (now or later) by using -b with the checkout command again. Example:
+
+      git checkout -b new_branch_name
+
+    HEAD is now at b574c5f... Merge pull request #10 from Mouseion/pro-git
 
 So in order to actually work with the remote branch, we'll need a local tracking branch set up to track the remote branch in question:
 
     git checkout -b bug123 origin/bug123
-    Branch bug123 set up to track remote branch refs/remotes/origin/master.
+
+Which will result in the following message from git:
+
+    Branch bug123 set up to track remote branch bug123 from origin.
     Switched to a new branch 'bug123'
 
 
@@ -845,7 +857,7 @@ Let's say this is the first time you're creating a release. You've worked with y
 
 Congratulations, you now have a 1.0 branch created, and a tag called *tag-1.0* and ready for release. Note that at this moment, the tag and the branch are identical. The difference is that the branch pointer may continue to evolve as it gains new commits for prod fixes, while the tag is there permanently for future reference to the branch point.
 
-### Using cherry-pick to move bugs into a release
+### Using cherry-pick to move bugfixes into a release
 
 Your release is running in production, and you've found a bug. Let's commit the bugfix into *master*, and then cherry-pick the same patch into the branch.
 
@@ -923,7 +935,7 @@ If your project uses an unconventional branch layout in subversion, for example 
 [svn-remote "svn"]
 url = http://company.com/svn/projects
 fetch = trunk/project-foo:refs/remotes/project-foo/trunk
-branches = branches/\*/project-foo:refs/remotes/project-foo/branches/\*
+branches = branches/*/project-foo:refs/remotes/project-foo/branches/*
 ```
 
 ### Migrating to git: keeping svn and git in sync
