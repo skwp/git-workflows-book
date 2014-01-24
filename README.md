@@ -936,7 +936,7 @@ If your project uses an unconventional branch layout in subversion, for example 
 [svn-remote "svn"]
 url = http://company.com/svn/projects
 fetch = trunk/project-foo:refs/remotes/project-foo/trunk
-branches = branches/\*/project-foo:refs/remotes/project-foo/branches/\*
+branches = branches/*/project-foo:refs/remotes/project-foo/branches/*
 ```
 
 ### Migrating to git: keeping svn and git in sync
