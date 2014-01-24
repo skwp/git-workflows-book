@@ -79,7 +79,7 @@ The working tree is the set of files you're currently working with. To start wor
 There is a place interchangeably known as the index, cache, or staging area. This is where you put your changes before they are ready to be comitted to the repository. You'll learn more about the index in Chapter 2, but for now just think of the index as a place that lets you selectively commit changes you make. For example, if you've made a set of file modifications, but it turns out they are two unrelated changes, you can add the appropriate half first to the index, make the commit, and then add the second half and make another commit.
 
 A great image of the git workflow and all the parts of the repo is at :
-![](http://osteele.com/images/2008/git-transport.png)
+![](http://assets.osteele.com/images/2008/git-transport.png)
 
 For more introduction to how git works, please see PeepCode's Git Internals book.
 
