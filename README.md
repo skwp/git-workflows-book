@@ -858,7 +858,7 @@ Let's say this is the first time you're creating a release. You've worked with y
 
 Congratulations, you now have a 1.0 branch created, and a tag called *tag-1.0* and ready for release. Note that at this moment, the tag and the branch are identical. The difference is that the branch pointer may continue to evolve as it gains new commits for prod fixes, while the tag is there permanently for future reference to the branch point.
 
-### Using cherry-pick to move bugs into a release
+### Using cherry-pick to move bugfixes into a release
 
 Your release is running in production, and you've found a bug. Let's commit the bugfix into *master*, and then cherry-pick the same patch into the branch.
 
