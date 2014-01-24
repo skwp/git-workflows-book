@@ -603,15 +603,26 @@ If you ever try to check out a remote tracking branch directly:
 
 You will get a warning from git that looks like this:
 
-    Note: moving to "origin/master" which isn't a local branch
-      If you want to create a new branch from this checkout, you may do so
-      (now or later) by using -b with the checkout command again. Example:
-        git checkout -b
+    Note: checking out 'origin/master'.
+
+    You are in 'detached HEAD' state. You can look around, make experimental
+    changes and commit them, and you can discard any commits you make in this
+    state without impacting any branches by performing another checkout.
+
+    If you want to create a new branch to retain commits you create, you may
+    do so (now or later) by using -b with the checkout command again. Example:
+
+      git checkout -b new_branch_name
+
+    HEAD is now at b574c5f... Merge pull request #10 from Mouseion/pro-git
 
 So in order to actually work with the remote branch, we'll need a local tracking branch set up to track the remote branch in question:
 
     git checkout -b bug123 origin/bug123
-    Branch bug123 set up to track remote branch refs/remotes/origin/master.
+
+Which will result in the following message from git:
+
+    Branch bug123 set up to track remote branch bug123 from origin.
     Switched to a new branch 'bug123'
 
 
