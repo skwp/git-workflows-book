@@ -546,7 +546,7 @@ This will push out changes on all branches that have matching branches on the re
 
 Git is pretty low level when it comes to managing local and remote branches and keeping them in sync. Enter git-remote-branch: a great tool that helps you automate day to day operations on remote branches. As a bonus, it shows you exactly what it's doing under the hood so you can learn more about how git works. The rest of this chapter will assume you have git-remote-branch installed, and are using the `grb` command.
 
-Homepage: http://github.com/webmat/git\_remote\_branch/tree/master
+Homepage: http://github.com/webmat/git_remote_branch/tree/master
 Installation (you will need rubygems for this):
 
     sudo gem install git_remote_branch --include-dependencies
