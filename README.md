@@ -439,7 +439,7 @@ When you grab a file from a previous time, it sits in your index, modified. So w
     # Changes to be committed:
     #   (use "git reset HEAD ..." to unstage)
     #
-    # modified:   README
+    #       modified:   README
     #
 
 
