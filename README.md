@@ -1089,3 +1089,7 @@ Copyright 2011, [Yan Pritzker](http://yanpritzker.com). All Rights Reserved.
       # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
       # instead of a/b/c/d as prefixes for patches
       mnemonicprefix = true
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/skwp/git-workflows-book/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
