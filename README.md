@@ -346,7 +346,7 @@ When you've wandered off for a while on your topic branch, working on your bug o
         D---E---F---G master
 
 
-So what rebase does is stash your changes, grab the latest from master, and then apply your changes on top. This effectively makes it as if rather than branching several days ago, you just branched now from te tip of the master and made your commits there.
+So what rebase does is stash your changes, grab the latest from master, and then apply your changes on top. This effectively makes it as if rather than branching several days ago, you just branched now from the tip of the master and made your commits there.
 
 Most of the time, this will work without a hitch. However, you may occasionally get a merge conflict if the same file has been modified in the same place on both branches. If this happens, git will complain with a very loud and verbose error message. The important thing with git is always to read the end of the message. You will then see that it tells you to resolve the conflict and then `git rebase --continue` or `git rebase --abort`.
 
